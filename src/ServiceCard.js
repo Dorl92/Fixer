@@ -167,7 +167,7 @@ function Card(props) {
                                 {sellerData.firstname} {sellerData.lastname}
                             </div>
                             <div className={classes.supplierTitle}>
-                                {serviceData.serviceType}
+                                {serviceData.category}
                             </div>
                         </div>
                     </div>

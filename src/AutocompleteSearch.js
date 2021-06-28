@@ -11,7 +11,7 @@ import img3 from './images/homepageImage_3.jpg';
 
 
 function AutocompleteSearch(props) {
-    const { classes, history, searchData, serviceTypeData } = props;
+    const { classes, history, searchData } = props;
 
     const settings = {
         dots: false,
@@ -32,10 +32,9 @@ function AutocompleteSearch(props) {
                 <SearchBar searchData={searchData} />
                 <div className={classes.popularTabs}>
                     <span>Popular:</span>
-                    {serviceTypeData.map((service, i) => {
-                        if (i < 3) return <div className={classes.tab} onClick={()=> history.push(`/services/${service.toLowerCase().replace(/ /i, '-')}`)}>{service}</div>
-                    }
-                    )}
+                    <div className={classes.tab} onClick={()=> history.push(`/services/${"Programming & Tech".toLowerCase()}`)}>Programming & Tech</div>
+                    <div className={classes.tab} onClick={()=> history.push(`/services/${"Graphics & Design".toLowerCase()}`)}>Graphics & Design</div>
+                    <div className={classes.tab} onClick={()=> history.push(`/services/${"Music & Audio".toLowerCase()}`)}>Music & Audio</div>
                 </div>
             </div>
             <div className={classes.carousel}>

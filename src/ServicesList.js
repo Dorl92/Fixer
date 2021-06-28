@@ -51,7 +51,7 @@ function ServicesList(props) {
                 {services ?
                     <TransitionGroup className={classes.services}>
                         {category ? services.map(service => {
-                            if (service.category === category) {
+                            if ((service.category.toLowerCase() === category) || (service.subcategory.toLowerCase() === category)) {
                                 return (
                                     <CSSTransition key={service.serviceId} timeout={300} classNames="fade">
                                         <ServiceCard

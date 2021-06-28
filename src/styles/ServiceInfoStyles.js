@@ -56,10 +56,11 @@ export default {
         fontSize: "32px",
         fontWeight: "700"
     },
-    serviceType: {
+    serviceCategory: {
         color: "gray",
-        fontWeight: "600",
-        fontSize: "17px"
+        margin: "0 1rem",
+        fontWeight: "400",
+        fontSize: "18px"
     },
     serviceData: {
         display: "flex",
@@ -117,8 +118,14 @@ export default {
         width: "90%"
     },
     fullDescription: {
-        fontSize: "24px",
+        display: "flex",
+        flexDirection: "column",
+        fontSize: "20px",
         margin: "1.5rem 1rem",
+        "& strong":{
+            fontSize: "22px",
+            marginBottom: "0.5rem"
+        }
     },
     reviewsContainer: {
         width: "30%",

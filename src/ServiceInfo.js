@@ -10,11 +10,6 @@ import styles from './styles/ServiceInfoStyles';
 import Loader from 'react-loader-spinner';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
-import Button from '@material-ui/core/Button';
-import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
-import ArrowForwardIosRoundedIcon from '@material-ui/icons/ArrowForwardIosRounded';
-
-import Carousel, { arrowsPlugin, Dots } from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 import { withStyles } from '@material-ui/styles';
 import Avatar from '@material-ui/core/Avatar';
@@ -95,7 +90,9 @@ function ServiceInfo(props) {
                             <div className={classes.serviceDetails}>
                                 <div className={classes.serviceTitle}>
                                     {serviceData.title}
-                                    <span className={classes.serviceType}>{` / ${serviceData.serviceType}`}</span>
+                                </div>
+                                <div className={classes.serviceCategory}>
+                                    <span >{`${serviceData.category} / ${serviceData.subcategory}`}</span>
                                 </div>
                                 <div className={classes.serviceData}>
                                     <div className={classes.sellerData}>
@@ -131,6 +128,7 @@ function ServiceInfo(props) {
                                 </Slider>
                             </div>
                             <div className={classes.fullDescription}>
+                                <strong>About This Service</strong>
                                 {serviceData.description}
                             </div>
                         </div>

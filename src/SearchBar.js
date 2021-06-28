@@ -65,7 +65,7 @@ function AutocompleteSearch(props) {
     };
 
     const handleSearch = () => {
-        history.push(`/services/${userInput.toLowerCase().replace(/ /i, '-')}`)
+        history.push(`/services/${userInput.toLowerCase()}`)
     }
 
     let suggestionsListComponent;

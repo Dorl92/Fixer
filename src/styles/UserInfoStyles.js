@@ -5,8 +5,14 @@ export default {
         width: "80%",
         display: "flex",
         justifyContent: "space-between",
-        [sizes.down("xl")]: {
+        [sizes.down("xxxl")]: {
+            width: "85%",
+        },
+        [sizes.down("xxl")]: {
             width: "90%",
+        },
+        [sizes.down("xl")]: {
+            width: "95%",
         },
         [sizes.down("lg")]: {
             display: "block",
@@ -18,7 +24,7 @@ export default {
         width: "25%",
         margin: "2rem 0.5rem 2rem 1rem",
         [sizes.down("lg")]: {
-            width: "50%",
+            width: "40%",
             marginLeft: "auto",
             marginRight: "auto"
         },
@@ -31,15 +37,10 @@ export default {
     },
     dashboard: {
         width: "75%",
-        margin: "2rem 1rem 2rem 1rem",
+        margin: "2rem 2rem",
         [sizes.down("lg")]: {
-            width: "50%",
-            marginLeft: "auto",
-            marginRight: "auto"
-        },
-        [sizes.down("md")]: {
-            width: "65%",
-        }
+            width: "95%",
+         },
     },
     cardPersnalInfo: {
         display: "flex",
@@ -233,7 +234,7 @@ export default {
     skillButton: {
         backgroundColor: "white",
         height: "35px",
-        width: "20%",
+        width: "fit-content",
         border: "1px solid rgb(221, 221, 221)",
         color: "#727474",
         borderRadius: "2px",

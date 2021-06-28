@@ -1,46 +1,28 @@
 export default {
-    purchaseContainer: {
-        // position: "relative",
-        // display: "flex",
-        // flexDirection: "column",
-        // justifyContent: "space-between",
-        width: "200px",
-        height: "250px",
-        // border: "1px solid rgb(221, 221, 221)",
-        borderRadius: "10px",
-        backgroundColor: "rgb(240, 240, 240)",
-        marginBottom: "1rem",
-        margin: "0.5rem",
-        // "&:hover svg": {
-        //     cursor: "pointer"
-        // }
-    },
-    purchaseDetails: {
+    container: {
         display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        height: "50%",
-    },
-    purchaseImage: {
+        alignItems: "center",
         width: "100%",
-        height: "50%",
-        "& img": {
-            width: "100%",
-            height: "100%",
-            borderRadius: "10px 10px 0 0",
-        }
+        fontSize: "16px",
+        height: "60px",
+        borderRadius: "4px",
+        backgroundColor: "rgb(240, 240, 240)",
+        margin: "0.2rem 0",
     },
-    purchaseHeader: {
-        padding: "0.2rem 0.2rem",
+    categoryColor: {
+        width: "0.6%",
+        height: "100%",
+        borderRadius: "4px 0 0 4px",
     },
-    purchaseFooter: {
-        padding: "0 0.3rem 0.5rem 0.3rem",
-        fontSize: "14px",
-        fontWeight: "300"
+    title: {
+        width: "35%",
+        margin: "0 0.5rem",
     },
-    purchaseTitle: {
+    subcategory:{
+        width: "25%"
+    },
+    tab: {
         borderRadius: "15px",
-        backgroundColor: "#23775a",
         color: "white",
         width: "fit-content",
         fontSize: "14px",
@@ -48,13 +30,27 @@ export default {
         padding: "1px 12px",
         margin: "3px 0px"
     },
-    purchaseServiceType: {
-        borderRadius: "15px",
-        backgroundColor: "#29bb89",
-        color: "white",
-        width: "fit-content",
-        fontSize: "12px",
-        fontWeight: "300",
-        padding: "1px 12px",
+    sellerImage:{
+        margin: "0 0.5rem",
+        width: "35px",
+        height: "35px",
     },
+    deliveryDate:{
+        width: "15%",
+        marginLeft: "1rem",
+        marginRight: "1rem",
+        fontSize: "14px",
+        color: "#727474"
+    },
+    progress:{
+        height: "100%",
+        width: "10%",
+        marginLeft: "auto",
+        display: "flex"
+    },
+    circle:{
+        height: "70%",
+        marginTop: "auto",
+        marginBottom: "auto",
+    }
 }

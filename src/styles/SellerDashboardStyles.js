@@ -1,3 +1,5 @@
+import sizes from './sizes';
+
 export default {
     "@global": {
         ".fade-enter": {
@@ -15,12 +17,12 @@ export default {
             transition: "opacity 500ms ease-out"
         },
         ".slick-prev": {
-            "&:before":{
+            "&:before": {
                 color: "black",
             }
         },
         ".slick-next": {
-            "&:before":{
+            "&:before": {
                 color: "black"
             }
         }
@@ -28,28 +30,35 @@ export default {
     root: {
         width: "100%",
         display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "start", 
-        alignItems: "top",
+        marginTop: "1rem",
+        [sizes.down("xxl")]: {
+            display: "block",
+        },
+        [sizes.down("xxl")]: {
+            display: "flex",
+        },
+        [sizes.down("md")]: {
+            display: "block",
+        },
     },
     stageContainer: {
-        width: "fit-content",
+        width: "25%",
         height: "fit-content",
-        border: "1px solid rgb(221, 221, 221)",
-        borderRadius: "10px",
-        backgroundColor: "rgb(250, 250, 250)",
-        padding: "0 0.5rem",
-        borderRight: "1px solid rgb(221, 221, 221)",
-        margin: "0 0.2rem 1rem"
+        display: "flex",
+        flexDirection: "column",
+        margin: "0.2rem",
     },
     stageTitle: {
-        width: "fit-content",
-        borderRadius: "15px",
-        backgroundColor: "white",
-        padding: "0.5rem 1.5rem",
-        margin: "0.5rem auto 0.5rem auto",
+        width: "260px",
+        padding: "0.5rem 0",
+        marginBottom: "0.5rem",
         color: "#525252",
-        fontSize: "16px",
-        fontWeight: "600"
+        fontSize: "20px",
+        fontWeight: "700",
+        textAlign: "center",
+    },
+    solds: {
+        display: "flex",
+        flexDirection: "column"
     }
 }

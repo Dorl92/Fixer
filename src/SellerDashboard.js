@@ -5,6 +5,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { withStyles } from '@material-ui/styles';
 import styles from './styles/SellerDashboardStyles';
+import { Divider } from '@material-ui/core';
 
 function SellerDashboard(props) {
     const { classes, sellerSales, users, services, editPurchase } = props;
@@ -14,22 +15,25 @@ function SellerDashboard(props) {
                 <div className={classes.root}>
                     <TransitionGroup className={classes.stageContainer}>
                         <div className={classes.stageTitle}>Not Started</div>
-                        {sellerSales.map((sale, i) => {
-                            if (sale.progressStage === 0) {
-                                return <CSSTransition key={i} timeout={300} classNames="fade">
-                                    <SoldService
-                                        editPurchase={editPurchase}
-                                        key={sale.purchaseId}
-                                        index={i}
-                                        users={users}
-                                        services={services}
-                                        sale={sale}
-                                        progressStage={sale.progressStage}
-                                    />
-                                </CSSTransition>
+                        <div className={classes.solds}>
+                            {sellerSales.map((sale, i) => {
+                                if (sale.progressStage === 0) {
+                                    return <CSSTransition key={i} timeout={300} classNames="fade">
+                                        <SoldService
+                                            editPurchase={editPurchase}
+                                            key={sale.purchaseId}
+                                            index={i}
+                                            users={users}
+                                            services={services}
+                                            sale={sale}
+                                            progressStage={sale.progressStage}
+                                            category={sale.serviceCategory}
+                                        />
+                                    </CSSTransition>
+                                }
                             }
-                        }
-                        )}
+                            )}
+                        </div>
                     </TransitionGroup>
                     <TransitionGroup className={classes.stageContainer}>
                         <div className={classes.stageTitle}>In Progress</div>
@@ -44,6 +48,7 @@ function SellerDashboard(props) {
                                         services={services}
                                         sale={sale}
                                         progressStage={sale.progressStage}
+                                        category={sale.serviceCategory}
                                     />
                                 </CSSTransition>
                             }
@@ -63,6 +68,7 @@ function SellerDashboard(props) {
                                         services={services}
                                         sale={sale}
                                         progressStage={sale.progressStage}
+                                        category={sale.serviceCategory}
                                     />
                                 </CSSTransition>
                             }
@@ -82,6 +88,7 @@ function SellerDashboard(props) {
                                         services={services}
                                         sale={sale}
                                         progressStage={sale.progressStage}
+                                        category={sale.serviceCategory}
                                     />
                                 </CSSTransition>
                             }

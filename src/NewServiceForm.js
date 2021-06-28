@@ -22,7 +22,8 @@ function NewServiceForm(props) {
 
     const { loggedUser } = useAuth();
 
-    const [serviceType, changeServiceType, resetServiceType] = useInputState("");
+    const [category, changeCategory, resetCategory, setCategory] = useInputState("");
+    const [subcategory, changeSubcategory, resetSubcategory, setSubcategory] = useInputState("");
     const [title, changeTitle, resetTitle] = useInputState("");
     const [description, changeDescription, resetdescription] = useInputState("");
     const [price, changePrice, resetPrice] = useInputState("");
@@ -33,7 +34,15 @@ function NewServiceForm(props) {
 
     const [loadingUploadImage, setLoadingUploadImage] = useState(false);
 
-    const serviceTypeList = ["Graphics & Design", "Digital Marketing", " Writing & Translation", "Video & Animation", "Music & Audio", " Programming & Tech"];
+    const serviceCategoriesList = ["Graphics & Design", "Digital Marketing", "Writing & Translation", "Video & Animation", "Music & Audio", "Programming & Tech"];
+    const serviceSubCategoriesList = {
+        "Graphics & Design": ["Logo Design", "Business Cards", "Game Art", "Website Design", "Book Design", "Photoshop Editing", "Cartoons & Comics", "Other"],
+        "Digital Marketing": ["Social Media", "Content Marketing", "Video Marketing", "Web Analytics", "Music Promotion", "Other"],
+        "Writing & Translation": ["Articles", "Translation", "Book Editing", "Resume Writing", "Creative Writing", "Other"],
+        "Video & Animation": ["Video Editing", "Character Animation", "Visual Effects", "Book Traliers", "Drone Videography", "Other"],
+        "Music & Audio": ["Voice Over", "Session Musicians", "Songwriters", "Sound Design", "DJ Mixing", "Other"],
+        "Programming & Tech": ["Web Programming", "Game Deveopment", "Desktop Applications", "Mobile Apps", "User Testing", "Other"]
+    };
 
     useEffect(() => {
         ValidatorForm.addValidationRule('isPricePositive', (value) =>
@@ -79,18 +88,19 @@ function NewServiceForm(props) {
         }
         const newService = {
             serviceId: uuidv4(),
-            serviceType,
-            category: serviceType.toLowerCase().replace(/ /i, '-'),
+            category,
+            subcategory,
             title,
             description,
             price,
             images: images,
             totalScore: 0,
             numReviews: 0,
-            sellerId: loggedUser.userId
+            sellerId: loggedUser.userId,
         }
         addNewService(newService);
-        resetServiceType();
+        resetCategory();
+        resetSubcategory();
         resetTitle();
         resetdescription();
         resetPrice();
@@ -115,15 +125,32 @@ function NewServiceForm(props) {
                     <FormControl style={{ width: "100%" }}>
                         <TextValidator
                             select
+                            margin="normal"
                             id="selectService"
                             label="Select service"
-                            value={serviceType}
-                            onChange={changeServiceType}
+                            value={category}
+                            onChange={changeCategory}
                             validators={['required']}
                             errorMessages={['Select service type']} >
-                            {serviceTypeList.map(typeItem => <MenuItem value={typeItem}>{typeItem}</MenuItem>)}
+                            {serviceCategoriesList.map(typeItem => <MenuItem value={typeItem}>{typeItem}</MenuItem>)}
                         </TextValidator>
                     </FormControl>
+                    {category &&
+                        <FormControl style={{ width: "100%" }}>
+                            <TextValidator
+                                select
+                                margin="normal"
+                                id="selectService"
+                                label="Select subcategory"
+                                fullWidth
+                                value={subcategory}
+                                onChange={changeSubcategory}
+                                validators={['required']}
+                                errorMessages={['This field is required']} >
+                                {serviceSubCategoriesList[category].map(subcategory => <MenuItem value={subcategory}>{subcategory}</MenuItem>)}
+                            </TextValidator>
+                        </FormControl>
+                    }
                     <TextValidator
                         value={price}
                         onChange={changePrice}

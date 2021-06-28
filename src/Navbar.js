@@ -9,7 +9,7 @@ import styles from './styles/NavbarStyles';
 import Avatar from '@material-ui/core/Avatar';
 import { withStyles } from '@material-ui/core/styles';
 import { Fragment } from 'react';
-
+ 
 function Navbar(props) {
   const { history, classes, searchData } = props;
   const [error, setError] = useState("")

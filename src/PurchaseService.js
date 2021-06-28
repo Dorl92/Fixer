@@ -1,28 +1,48 @@
 import React, { Fragment } from 'react';
 import { withStyles } from '@material-ui/styles';
-import ProgressBar from "@ramonak/react-progress-bar";
+import Avatar from '@material-ui/core/Avatar';
+
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 import styles from './styles/PurchaseServiceStyles';
 
 function PurchaseService(props) {
-    const { classes, purchase, progressStage, services, users } = props;
+    const { classes, purchase, progressStage, category, services, users } = props;
 
-    let barColor = null;
+    let categoryColor = null;
     let progress = 10;
     switch (progressStage) {
         case 0:
-            barColor = "#ade8f4";
             break;
         case 1:
-            barColor = "#90e0ef";
             progress = 25;
             break;
         case 2:
-            barColor = "#00b4d8";
             progress = 75;
             break;
         case 3:
-            barColor = "#0077b6";
             progress = 100;
+            break;
+    }
+
+    switch (category) {
+        case 'Graphics & Design':
+            categoryColor = "#A22E2E";
+            break;
+        case 'Digital Marketing':
+            categoryColor = "#686490";
+            break;
+        case 'Writing & Translation':
+            categoryColor = "#2659A6";
+            break;
+        case 'Video & Animation':
+            categoryColor = "#D1C410";
+            break;
+        case 'Music & Audio':
+            categoryColor = "#13A429";
+            break;
+        case 'Programming & Tech':
+            categoryColor = "#BD7A23"; 
             break;
     }
 
@@ -37,43 +57,31 @@ function PurchaseService(props) {
     }
 
     return (
-        <div className={classes.purchaseContainer}>
+        <Fragment>
             {serviceData &&
-                <Fragment>
-                    <div className={classes.purchaseImage}>
-                        <img src={serviceData.images[0]} />
+                <div className={classes.container}>
+                    <div style={{ backgroundColor: categoryColor }} className={classes.categoryColor}></div>
+                    <div className={classes.title}>{serviceData.title}</div>
+                    <div className={classes.subcategory}>
+                        <div style={{ backgroundColor: categoryColor }} className={classes.tab}>{serviceData.subcategory}</div>
                     </div>
-                    <div className={classes.purchaseDetails}>
-                        <div className={classes.purchaseHeader}>
-                            <div className={classes.purchaseTitle}>
-                                {serviceData.title}
-                            </div>
-                            <div className={classes.purchaseServiceType}>
-                                {serviceData.serviceType}
-                            </div>
-                        </div>
-                        <div className={classes.purchaseFooter}>
-                            <div>
-                                Delivery date: <strong>{purchase.deliveryDate}</strong>
-                            </div>
-                            <div className={classes.progress}>
-                                Progress (by <strong>{sellerData.username})</strong>
-                            </div>
-                            <div className={classes.completionBar}>
-                                <ProgressBar
-                                    completed={progress}
-                                    labelAlignment="center"
-                                    labelColor="#f8f9fa"
-                                    height="15px"
-                                    labelSize="10px"
-                                    bgColor={barColor}
-                                />
-                            </div>
-                        </div>
+                    <Avatar src={sellerData.photoUrl} className={classes.sellerImage} />
+                    <div className={classes.deliveryDate}>{purchase.deliveryDate}</div>
+                    <div className={classes.progress}>
+                        <CircularProgressbar
+                            className={classes.circle}
+                            value={progress}
+                            text={`${progress}%`}
+                            styles={buildStyles({
+                                pathColor: "green",
+                                textColor: "green",
+                                textSize: "25px"
+                            })} />
                     </div>
-                </Fragment>
+                </div>
             }
-        </div>
+        </Fragment>
+
 
     );
 }

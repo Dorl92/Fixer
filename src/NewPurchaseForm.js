@@ -75,6 +75,7 @@ function NewPurchaseForm(props) {
             serviceId: serviceData.serviceId,
             sellerId: sellerData.userId,
             userId: loggedUser.userId,
+            serviceCategory: serviceData.category,
             pricePlan: plan,
             note: noteToSeller,
             progressStage: 0,

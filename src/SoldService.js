@@ -7,27 +7,50 @@ import Avatar from '@material-ui/core/Avatar';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import DoneIcon from '@material-ui/icons/Done';
+import { Divider } from '@material-ui/core';
 
 function SoldService(props) {
-    const { classes, services, users, sale, progressStage, editPurchase } = props;
+    const { classes, services, users, sale, progressStage, category, editPurchase } = props;
 
     let barColor = null;
+    let categoryColor = null;
     let progress = 10;
     switch (progressStage) {
         case 0:
-            barColor = "#ade8f4";
+            barColor = "#7AD30D";
             break;
         case 1:
-            barColor = "#90e0ef";
+            barColor = "#6FC00C";
             progress = 25;
             break;
         case 2:
-            barColor = "#00b4d8";
+            barColor = "#64AD0B";
             progress = 75;
             break;
         case 3:
-            barColor = "#0077b6";
+            barColor = "#59990A";
             progress = 100;
+            break;
+    }
+
+    switch (category) {
+        case 'Graphics & Design':
+            categoryColor = "#A22E2E";
+            break;
+        case 'Digital Marketing':
+            categoryColor = "#686490";
+            break;
+        case 'Writing & Translation':
+            categoryColor = "#2659A6";
+            break;
+        case 'Video & Animation':
+            categoryColor = "#D1C410";
+            break;
+        case 'Music & Audio':
+            categoryColor = "#13A429";
+            break;
+        case 'Programming & Tech':
+            categoryColor = "#BD7A23"; 
             break;
     }
 
@@ -89,9 +112,9 @@ function SoldService(props) {
     }
 
     return (
-        <div className={classes.saleContainer}>
+        <Fragment>
             {serviceData &&
-                <Fragment>
+                <div className={classes.container}>
                     <div className={classes.buttonsHover}>
                         {sale.progressStage !== 0 ?
                             <Avatar onClick={previousProgressStage}><NavigateBeforeIcon style={{ transform: "scale(1.7)" }} /></Avatar>
@@ -102,38 +125,34 @@ function SoldService(props) {
                             : <div></div>
                         }
                     </div>
-                    <div className={classes.saleHeader}>
-                        <div>
-                            <div className={classes.saleTitle}>
-                                {serviceData.title}
-                            </div>
-                            <div className={classes.saleServiceType}>
-                                {serviceData.serviceType}
-                            </div>
-                        </div>
-                        <div className={classes.saleDelivery}>
-                            {sale.progressStage === 3 ?
-                                <div style={{ border: "1px solid #349B25", color: "#349B25" }} className={classes.saleDays}>
-                                    <DoneIcon />
+                    <div style={{ backgroundColor: categoryColor }} className={classes.categoryColor}></div>
+                    <div className={classes.sale}>
+                        <div className={classes.header}>
+                            <div className={classes.subcategory}>
+                                <div style={{ backgroundColor: categoryColor }} className={classes.tab}>
+                                    {serviceData.subcategory}
                                 </div>
-                                :
-                                <div style={{ color: `${numDaysColor}`, border: `1px solid ${numDaysColor}` }} className={classes.saleDays}>
-                                    {daysLeft(sale.deliveryDate)}
-                                </div>
-                            }
-                            <div style={{ fontSize: "10px", color: "#525252" }}>
+                            </div>
+                            <div className={classes.delivery}>
                                 {sale.progressStage === 3 ?
-                                    "Done"
-                                    : "Days to delivery"
+                                    <div style={{ border: "1px solid #349B25", color: "#349B25" }} className={classes.daysLeft}>
+                                        <DoneIcon />
+                                    </div>
+                                    :
+                                    <div style={{ color: `${numDaysColor}`, border: `1px solid ${numDaysColor}` }} className={classes.daysLeft}>
+                                        {daysLeft(sale.deliveryDate)}
+                                    </div>
                                 }
+                                <div style={{ textAlign: "center", fontSize: "10px", color: "#525252" }}>
+                                    {sale.progressStage === 3 ?
+                                        "Done"
+                                        : "Days to delivery"
+                                    }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        <div className={classes.saleDetails}>
-                            <div className={classes.salePurchasedUser}>
-                                Purchased by: {userData.username}
-                            </div>
+                        <div className={classes.username}>
+                            Purchased by: {userData.username}
                         </div>
                         <div className={classes.completionBar}>
                             <ProgressBar
@@ -145,10 +164,61 @@ function SoldService(props) {
                                 bgColor={barColor} />
                         </div>
                     </div>
-                </Fragment>
+                </div>
             }
-        </div>
+        </Fragment>
     )
 }
 
 export default withStyles(styles)(SoldService);
+
+// <div className={classes.title}>{serviceData.title}</div>
+
+
+
+
+// <div className={classes.saleHeader}>
+// <div>
+//     <div className={classes.saleTitle}>
+//         {serviceData.category}
+//     </div>
+    // <div className={classes.saleServiceType}>
+    //     {serviceData.subcategory}
+    // </div>
+// </div>
+// <div className={classes.saleDelivery}>
+//     {sale.progressStage === 3 ?
+//         <div style={{ border: "1px solid #349B25", color: "#349B25" }} className={classes.saleDays}>
+//             <DoneIcon />
+//         </div>
+//         :
+//         <div style={{ color: `${numDaysColor}`, border: `1px solid ${numDaysColor}` }} className={classes.saleDays}>
+//             {daysLeft(sale.deliveryDate)}
+//         </div>
+//     }
+//     <div style={{ textAlign: "center", fontSize: "10px", color: "#525252" }}>
+//         {sale.progressStage === 3 ?
+//             "Done"
+//             : "Days to delivery"
+//         }
+//     </div>
+// </div>
+// </div>
+// <div>
+// <div className={classes.saleDetails}>
+    // <div className={classes.salePurchasedUser}>
+    //     Purchased by: {userData.username}
+    // </div>
+// </div>
+// <div className={classes.completionBar}>
+//     <ProgressBar
+//         completed={progress}
+//         labelAlignment="center"
+//         labelColor="#f8f9fa"
+//         height="15px"
+//         labelSize="10px"
+//         bgColor={barColor} />
+// </div>
+// </div>
+// </div>
+// </div>

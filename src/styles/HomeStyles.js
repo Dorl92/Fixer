@@ -20,6 +20,9 @@ export default {
         fontSize: "45px",
         fontWeight: "600",
         color: "#525252",
+        [sizes.down("xxl")]: {
+            marginLeft: "8%",
+        },
         [sizes.down("xl")]: {
             fontSize: "35px",
         },
@@ -29,7 +32,7 @@ export default {
     },
     slider: {
         margin: "0 auto 5rem auto",
-        width: "75%",
+        width: "80%",
         "& img": {
             width: "252px",
             height: "345px",
@@ -48,7 +51,7 @@ export default {
             marginLeft: "0.8rem",
             marginTop: "1rem",
             zIndex: "10",
-            fontSize: "28px",
+            fontSize: "26px",
             color: "rgb(250, 250, 250)",
             "& small": {
                 fontSize: "18px",
@@ -63,7 +66,7 @@ export default {
             }
         },
         [sizes.down("xxl")]: {
-            width: "85%",
+            width: "80%",
             "& img": {
                 width: "210px",
                 height: "287px",
@@ -88,14 +91,14 @@ export default {
         },
     },
     firstContainer: {
-        width: "75%",
+        width: "80%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         marginLeft: "auto",
         marginRight: "auto",
         [sizes.down("xl")]: {
-            width: "80%",
+            width: "90%",
         },
         [sizes.down("md")]: {
             display: "flex",
@@ -104,14 +107,14 @@ export default {
         },
     },
     secondContainer: {
-        width: "75%",
+        width: "80%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         marginLeft: "auto",
         marginRight: "auto",
         [sizes.down("xl")]: {
-            width: "80%",
+            width: "90%",
         },
         [sizes.down("md")]: {
             display: "flex",

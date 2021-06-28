@@ -285,11 +285,9 @@ function UserInfo(props) {
                                 users={users}
                                 editPurchase={editPurchase}
                             />
+                            <Divider />
                             {loggedUser.isSeller &&
                                 <SellerDashboard
-                                    // axis='y'
-                                    // distance={20}
-                                    // onSortEnd={onSortEnd}
                                     sellerSales={sellerSales}
                                     users={users}
                                     services={services}

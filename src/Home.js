@@ -1,14 +1,18 @@
-import Reactm from 'react';
+import React from 'react';
 
 import Slider from "react-slick";
 import Navbar from './Navbar';
 import styles from './styles/HomeStyles';
 import { withStyles } from '@material-ui/styles';
 
+import AutocompleteSearch from './AutocompleteSearch';
+
 import logoDesign from './images/logo_design.jpg';
 import tranlation from './images/translation.jpg';
 import webDevelopment from './images/web_development.jpg';
-import AutocompleteSearch from './AutocompleteSearch';
+import video from './images/video.jpg';
+import music from './images/music.jpg';
+import socialMedia from './images/social_media.jpg';
 
 import img1 from './images/homeImage_1.jpg';
 import img2 from './images/homeImage_2.jpg';
@@ -16,10 +20,11 @@ import about from './images/info.png';
 import design from './images/web-design.png';
 
 function Home(props) {
-    const { classes, history, searchData, serviceTypeData } = props;
+    const { classes, history, searchData } = props;
 
     const settings = {
         className: "center",
+        pauseOnHover: true,
         autoplay: true,
         centerMode: true,
         infinite: true,
@@ -36,15 +41,18 @@ function Home(props) {
             <div className={classes.searchContainer}>
                 <AutocompleteSearch
                     searchData={searchData}
-                    serviceTypeData={serviceTypeData}
                 />
             </div>
             <div className={classes.popularServices}>
                 <div className={classes.carouselTitle}>Some of our popular services</div>
                 <Slider {...settings} className={classes.slider}>
                     <div>
+                        <h4><small>Engage your audience</small>Video</h4>
+                        <img src={video} onClick={() => history.push("/services/video editing")} />
+                    </div>
+                    <div>
                         <h4><small>Bulid your</small>Logo</h4>
-                        <img src={logoDesign} onClick={() => history.push("/services/logo-design")} />
+                        <img src={logoDesign} onClick={() => history.push("/services/logo design")} />
                     </div>
                     <div>
                         <h4><small>Go global</small>Translation</h4>
@@ -52,19 +60,15 @@ function Home(props) {
                     </div>
                     <div>
                         <h4><small>Design your own</small>Website</h4>
-                        <img src={webDevelopment} onClick={() => history.push("/services/web-development")} />
+                        <img src={webDevelopment} onClick={() => history.push("/services/website design")} />
                     </div>
                     <div>
-                        <h4><small>Bulid your</small>Logo</h4>
-                        <img src={logoDesign} onClick={() => history.push("/services/logo-design")} />
+                        <h4><small>Record songs</small>Music</h4>
+                        <img src={music} onClick={() => history.push("/services/sound design")} />
                     </div>
                     <div>
-                        <h4><small>Go global</small>Translation</h4>
-                        <img src={tranlation} onClick={() => history.push("/services/translation")} />
-                    </div>
-                    <div>
-                        <h4><small>Design your own</small>Website</h4>
-                        <img src={webDevelopment} onClick={() => history.push("/services/web-development")} />
+                        <h4><small>Reach more customers</small>Social Media</h4>
+                        <img src={socialMedia} onClick={() => history.push("/services/social media")} />
                     </div>
                 </Slider>
             </div>

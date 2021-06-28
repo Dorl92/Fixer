@@ -28,10 +28,6 @@ function App() {
   const { purchases, setPurchases, addNewPurchase, editPurchase, removePurchase } = usePurchasesState([]);
   const { reviews, setReviews, addNewReview, removeReview, editReview } = useReviewState([]);
 
-  let searchData = [];
-  const serviceTypeData = [];
-  const serviceTitleData = [];
-
   useEffect(() => {
     const fetchData = async () => {
       await database.ref('users/')
@@ -57,11 +53,12 @@ function App() {
     }
     fetchData();
   }, []);
+ 
+  const searchData = new Set();
 
-  if(services){
-    services.map(service => serviceTypeData.push(service.serviceType))
-    services.map(service => serviceTitleData.push(service.title))
-    searchData = serviceTypeData.concat(serviceTitleData)
+  if (services) {
+    services.map(service => !searchData.has(service.category) && searchData.add(service.category))
+    services.map(service => !searchData.has(service.subcategory) && searchData.add(service.subcategory))
   }
 
   const { loggedUser, currentUser } = useAuth();
@@ -80,8 +77,7 @@ function App() {
                 <Page>
                   <Home
                     {...routePros}
-                    serviceTypeData={serviceTypeData}
-                    searchData={searchData} /></Page>}
+                    searchData={Array.from(searchData)} /></Page>}
               />
               {loggedUser && loggedUser.isSeller &&
                 <Route exact path="/services/new" render={(routePros) =>
