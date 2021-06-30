@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
-import PurchaseService from './PurchaseService';
-import { SortableContainer } from 'react-sortable-hoc'
 import { withStyles } from '@material-ui/styles';
 import styles from './styles/UserDashboardStyles';
+import { Divider } from '@material-ui/core';
+import PurchaseServiceList from './PurchaseServiceList';
 
 function UserDashboard(props) {
-    const { classes, userPurchases, users, services, editPurchase } = props;
+    const { classes, userPurchases, users, services, editPurchase, onSortEnd } = props;
     let legned = new Map();
     if (userPurchases) {
         userPurchases.map(purchase => {
@@ -17,7 +17,8 @@ function UserDashboard(props) {
             }
         })
     }
-    const categories = [...legned.keys()].map((key) => {
+    const categories = [...legned.keys()].sort()
+    const sortedCategories = categories.map((key) => {
         let categoryColor = null;
         switch (key) {
             case 'Graphics & Design':
@@ -51,35 +52,30 @@ function UserDashboard(props) {
             {userPurchases &&
                 <div className={classes.root}>
                     <div className={classes.title}>Purchased Services</div>
+                    <div className={classes.subtitle}>Drag & drop any purchase to arrange your purchases list</div>
+                    <Divider style={{ marginBottom: "2rem" }} />
                     <div className={classes.container}>
                         <div className={classes.legend}>
                             <div className={classes.category}>
                                 <div style={{ backgroundColor: "#1F1E1E" }} className={classes.categoryCircle}>{userPurchases.length}</div>
                                 <div className={classes.categoryText}>All</div>
                             </div>
-                            {categories}
+                            {sortedCategories}
                         </div>
-                        <div className={classes.purchases}>
-                            {userPurchases.map((purchase, i) =>
-                                <PurchaseService
-                                    editPurchase={editPurchase}
-                                    key={purchase.purchaseId}
-                                    index={i}
-                                    users={users}
-                                    services={services}
-                                    purchase={purchase}
-                                    progressStage={purchase.progressStage}
-                                    category={purchase.serviceCategory}
-                                />
-                            )}
-                        </div>
+                        <PurchaseServiceList
+                            axis='y'
+                            distance={20}
+                            onSortEnd={onSortEnd}
+                            userPurchases={userPurchases}
+                            users={users}
+                            services={services}
+                            editPurchase={editPurchase}
+                        />
                     </div>
-
-
                 </div>
             }
         </Fragment>
     );
 }
 
-export default SortableContainer(withStyles(styles)(UserDashboard));
+export default withStyles(styles)(UserDashboard);

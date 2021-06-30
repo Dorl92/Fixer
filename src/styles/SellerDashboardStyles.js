@@ -29,8 +29,23 @@ export default {
     },
     root: {
         width: "100%",
+        marginTop: "1rem"
+    },
+    title: {
+        width: "fit-content",
+        marginBottom: "0.2rem",
+        color: "#525252",
+        fontSize: "24px",
+        fontWeight: "700"
+    },
+    subtitle: {
+        fontSize: "16px",
+        color: "#525252",
+        fontWeight: "300",
+        marginBottom: "0.5rem",
+    },
+    container: {
         display: "flex",
-        marginTop: "1rem",
         [sizes.down("xxl")]: {
             display: "block",
         },

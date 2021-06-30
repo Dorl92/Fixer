@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react';
 import { withStyles } from '@material-ui/styles';
 import Avatar from '@material-ui/core/Avatar';
-
+import { SortableElement } from 'react-sortable-hoc';
+import { withRouter } from 'react-router-dom';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import styles from './styles/PurchaseServiceStyles';
 
 function PurchaseService(props) {
-    const { classes, purchase, progressStage, category, services, users } = props;
+    const { history, classes, purchase, progressStage, category, services, users } = props;
 
     let categoryColor = null;
     let progress = 10;
@@ -65,7 +66,7 @@ function PurchaseService(props) {
                     <div className={classes.subcategory}>
                         <div style={{ backgroundColor: categoryColor }} className={classes.tab}>{serviceData.subcategory}</div>
                     </div>
-                    <Avatar src={sellerData.photoUrl} className={classes.sellerImage} />
+                    <Avatar src={sellerData.photoUrl} className={classes.sellerImage} onClick={() => history.push(`/user-info/${serviceData.sellerId}`)} />
                     <div className={classes.deliveryDate}>{purchase.deliveryDate}</div>
                     <div className={classes.progress}>
                         <CircularProgressbar
@@ -81,9 +82,7 @@ function PurchaseService(props) {
                 </div>
             }
         </Fragment>
-
-
     );
 }
 
-export default withStyles(styles)(PurchaseService);
+export default SortableElement(withRouter(withStyles(styles)(PurchaseService)));

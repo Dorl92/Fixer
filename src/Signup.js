@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from './contexts/authContext';
 import axios from 'axios';
 import useInputState from './hooks/useInputState';
-
+import Avatar from '@material-ui/core/Avatar';
 import Loader from 'react-loader-spinner';
 import Layout from './Layout';
 import Button from '@material-ui/core/Button';
@@ -142,7 +142,7 @@ function Signup(props) {
                             <Fragment>
                                 {photoUrl &&
                                     <div className={classes.image}>
-                                        <img src={photoUrl} />
+                                        <Avatar src={photoUrl} className={classes.avatarImage} />
                                         <section className={classes.deleteImageIcon} onClick={handleDeleteImage} >
                                             <DeleteIcon />
                                         </section>

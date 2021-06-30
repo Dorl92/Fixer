@@ -14,29 +14,12 @@ export default {
     popularServices: {
         width: "100%",
     },
-    carouselTitle: {
-        marginLeft: "12.5%",
-        marginBottom: "1.5rem",
-        fontSize: "45px",
-        fontWeight: "600",
-        color: "#525252",
-        [sizes.down("xxl")]: {
-            marginLeft: "8%",
-        },
-        [sizes.down("xl")]: {
-            fontSize: "35px",
-        },
-        [sizes.down("md")]: {
-            display: "none",
-        },
-    },
     slider: {
         margin: "0 auto 5rem auto",
-        width: "80%",
+        width: "90%",
         "& img": {
-            width: "252px",
-            height: "345px",
-            background: "rgb(0,0,0,0.8)",
+            width: "265px",
+            height: "370px",
             borderRadius: "5px",
             cursor: "pointer",
             transition: "all 0.2s ease-in-out",
@@ -59,21 +42,18 @@ export default {
             }
         },
         [sizes.down("xxxl")]: {
-            width: "80%",
             "& img": {
                 width: "225px",
                 height: "308px",
             }
         },
         [sizes.down("xxl")]: {
-            width: "80%",
             "& img": {
                 width: "210px",
                 height: "287px",
             }
         },
         [sizes.down("xl")]: {
-            width: "90%",
             "& img": {
                 width: "195px",
                 height: "267px",
@@ -82,16 +62,32 @@ export default {
         [sizes.down("lg")]: {
             width: "95%",
             "& img": {
-                width: "180px",
-                height: "246px",
+                width: "160px",
+                height: "230px",
             }
         },
         [sizes.down("md")]: {
             display: "none"
         },
     },
+    sliderTitle: {
+        marginLeft: "12.5%",
+        marginBottom: "1.5rem",
+        fontSize: "45px",
+        fontWeight: "600",
+        color: "#525252",
+        [sizes.down("xxl")]: {
+            marginLeft: "8%",
+        },
+        [sizes.down("xl")]: {
+            fontSize: "35px",
+        },
+        [sizes.down("md")]: {
+            display: "none",
+        },
+    },
     firstContainer: {
-        width: "80%",
+        width: "90%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -99,6 +95,9 @@ export default {
         marginRight: "auto",
         [sizes.down("xl")]: {
             width: "90%",
+        },
+        [sizes.down("lg")]: {
+            width: "95%",
         },
         [sizes.down("md")]: {
             display: "flex",
@@ -107,7 +106,7 @@ export default {
         },
     },
     secondContainer: {
-        width: "80%",
+        width: "90%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -115,6 +114,9 @@ export default {
         marginRight: "auto",
         [sizes.down("xl")]: {
             width: "90%",
+        },
+        [sizes.down("lg")]: {
+            width: "95%",
         },
         [sizes.down("md")]: {
             display: "flex",

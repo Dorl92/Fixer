@@ -8,6 +8,9 @@ export default {
         borderRadius: "4px",
         backgroundColor: "rgb(240, 240, 240)",
         margin: "0.2rem 0",
+        "&:hover":{
+            cursor: "pointer"
+        }
     },
     categoryColor: {
         width: "0.6%",
@@ -34,6 +37,9 @@ export default {
         margin: "0 0.5rem",
         width: "35px",
         height: "35px",
+        "&:hover":{
+            cursor: "pointer"
+        }
     },
     deliveryDate:{
         width: "15%",

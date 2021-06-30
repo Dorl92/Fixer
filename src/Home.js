@@ -29,9 +29,9 @@ function Home(props) {
         centerMode: true,
         infinite: true,
         slidesToShow: 5,
-        speed: 7000,
         slidesToScroll: 1,
-        autoplaySpeed: 1,
+        speed: 900,
+        autoplaySpeed: 4000,
         cssEase: "linear",
     };
 
@@ -44,7 +44,7 @@ function Home(props) {
                 />
             </div>
             <div className={classes.popularServices}>
-                <div className={classes.carouselTitle}>Some of our popular services</div>
+                <div className={classes.sliderTitle}>Some of our popular services</div>
                 <Slider {...settings} className={classes.slider}>
                     <div>
                         <h4><small>Engage your audience</small>Video</h4>

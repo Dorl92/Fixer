@@ -53,6 +53,10 @@ export default {
             borderRadius: "50%",     
         }
     },
+    avatarImage:{
+        width: "150px",
+        height: "150px",
+    },
     inputImage: {
         width: "0.1px",
         height: "0.1px",

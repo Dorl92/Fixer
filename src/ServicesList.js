@@ -14,7 +14,7 @@ import ServiceCard from './ServiceCard';
 import styles from './styles/ServicesListStyles';
 import Layout from './Layout';
 import { Divider } from '@material-ui/core';
-
+ 
 function ServicesList(props) {
     const { classes, history, category, removeService, editUser, purchases, removePurchase } = props;
     const [services, setServices] = useState(null)

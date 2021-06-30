@@ -1,9 +1,7 @@
 import React from 'react';
 import { useAuth } from './contexts/authContext';
-
 import './styles/stylesheets/stars.css';
 import ClearIcon from '@material-ui/icons/Clear';
-import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/styles';
 import styles from './styles/ReviewStyles';
 

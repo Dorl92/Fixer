@@ -9,8 +9,6 @@ import './styles/stylesheets/stars.css';
 import styles from './styles/ServiceInfoStyles';
 import Loader from 'react-loader-spinner';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-
-import '@brainhubeu/react-carousel/lib/style.css';
 import { withStyles } from '@material-ui/styles';
 import Avatar from '@material-ui/core/Avatar';
 import ReviewForm from './ReviewForm';

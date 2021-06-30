@@ -1,13 +1,11 @@
 import React, { Fragment } from 'react';
 import { withStyles } from '@material-ui/styles';
 import styles from './styles/SoldServiceStyles';
-// import { SortableElement } from 'react-sortable-hoc';
 import ProgressBar from "@ramonak/react-progress-bar";
 import Avatar from '@material-ui/core/Avatar';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import DoneIcon from '@material-ui/icons/Done';
-import { Divider } from '@material-ui/core';
 
 function SoldService(props) {
     const { classes, services, users, sale, progressStage, category, editPurchase } = props;
@@ -108,6 +106,7 @@ function SoldService(props) {
 
     }
     const nextProgressStage = () => {
+        console.log(sale)
         editPurchase({ ...sale, progressStage: sale.progressStage + 1 }, sale.purchaseId)
     }
 
@@ -171,54 +170,3 @@ function SoldService(props) {
 }
 
 export default withStyles(styles)(SoldService);
-
-// <div className={classes.title}>{serviceData.title}</div>
-
-
-
-
-// <div className={classes.saleHeader}>
-// <div>
-//     <div className={classes.saleTitle}>
-//         {serviceData.category}
-//     </div>
-    // <div className={classes.saleServiceType}>
-    //     {serviceData.subcategory}
-    // </div>
-// </div>
-// <div className={classes.saleDelivery}>
-//     {sale.progressStage === 3 ?
-//         <div style={{ border: "1px solid #349B25", color: "#349B25" }} className={classes.saleDays}>
-//             <DoneIcon />
-//         </div>
-//         :
-//         <div style={{ color: `${numDaysColor}`, border: `1px solid ${numDaysColor}` }} className={classes.saleDays}>
-//             {daysLeft(sale.deliveryDate)}
-//         </div>
-//     }
-//     <div style={{ textAlign: "center", fontSize: "10px", color: "#525252" }}>
-//         {sale.progressStage === 3 ?
-//             "Done"
-//             : "Days to delivery"
-//         }
-//     </div>
-// </div>
-// </div>
-// <div>
-// <div className={classes.saleDetails}>
-    // <div className={classes.salePurchasedUser}>
-    //     Purchased by: {userData.username}
-    // </div>
-// </div>
-// <div className={classes.completionBar}>
-//     <ProgressBar
-//         completed={progress}
-//         labelAlignment="center"
-//         labelColor="#f8f9fa"
-//         height="15px"
-//         labelSize="10px"
-//         bgColor={barColor} />
-// </div>
-// </div>
-// </div>
-// </div>

@@ -62,6 +62,7 @@ function UserInfo(props) {
                 const data = snapshot.val();
                 const allPurchases = data && Object.values(data)
                 if (allPurchases) {
+                    console.log("test")
                     const sellerSales = allPurchases.filter(purchase => purchase.sellerId === userId)
                     setSellerSales(sellerSales)
                     const userPurchases = allPurchases.filter(purchase => purchase.userId === userId)
@@ -145,7 +146,7 @@ function UserInfo(props) {
     }
 
     const onSortEnd = ({ oldIndex, newIndex }) => {
-        setSellerSales((arrayMove(sellerSales, oldIndex, newIndex)))
+        setUserPurchases((arrayMove(userPurchases, oldIndex, newIndex)))
     }
 
     return (
@@ -276,16 +277,15 @@ function UserInfo(props) {
                     </div>
                     {loggedUser && loggedUser.userId === userId &&
                         <div className={classes.dashboard}>
-                            <UserDashboard
-                                // axis='y'
-                                // distance={20}
-                                // onSortEnd={onSortEnd}
-                                userPurchases={userPurchases}
-                                services={services}
-                                users={users}
-                                editPurchase={editPurchase}
-                            />
-                            <Divider />
+                            {userPurchases.length ?
+                                <UserDashboard
+                                    onSortEnd={onSortEnd}
+                                    userPurchases={userPurchases}
+                                    services={services}
+                                    users={users}
+                                    editPurchase={editPurchase}
+                                /> : null
+                            }
                             {loggedUser.isSeller &&
                                 <SellerDashboard
                                     sellerSales={sellerSales}

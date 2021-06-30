@@ -70,11 +70,13 @@ function Card(props) {
         averageScore = serviceData.totalScore / serviceData.numReviews;
     }
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+    const handleClick = evt => {
+        evt.stopPropagation();
+        setAnchorEl(evt.currentTarget);
     }
 
-    const handleClose = () => {
+    const handleClose = evt => {
+        evt.stopPropagation();
         setAnchorEl(null);
     }
 
@@ -85,7 +87,8 @@ function Card(props) {
         setOpenSnackbar(false);
     };
 
-    const handleRemoveService = () => {
+    const handleRemoveService = evt => {
+        evt.stopPropagation();
         if (purchases && purchases.find(purchase => purchase.serviceId === serviceData.serviceId && purchase.progressStage !== 3)) {
             setOpenSnackbar(true)
             setAnchorEl(null)
@@ -97,6 +100,7 @@ function Card(props) {
     }
 
     const handleFavorite = evt => {
+        evt.stopPropagation();
         const updatedFavorites = loggedUser.favorites ? [...loggedUser.favorites] : []
         if (updatedFavorites.includes(serviceData.serviceId)) {
             const index = updatedFavorites.indexOf(serviceData.serviceId)
@@ -112,14 +116,16 @@ function Card(props) {
         editUser(updatedUser, loggedUser.userId)
     }
 
-    const nextImage = () => {
+    const nextImage = evt => {
+        evt.stopPropagation();
         if (currentImage >= 0 && currentImage < serviceData.images.length - 1) {
             setCurrentImage(currentImage + 1)
         } else {
             setCurrentImage(0)
         }
     }
-    const previousImage = () => {
+    const previousImage = evt => {
+        evt.stopPropagation();
         if (currentImage > 0 && currentImage <= serviceData.images.length - 1) {
             setCurrentImage(currentImage - 1)
         } else {
@@ -131,9 +137,9 @@ function Card(props) {
         <Fragment>
             {serviceData && sellerData &&
                 <div className={classes.card}>
-                    <div className={classes.image}>
+                    <div className={classes.image} onClick={() => fullServiceInfo(serviceData.serviceId)}>
                         {loggedUser && loggedUser.userId === serviceData.sellerId &&
-                            <div className={classes.more}>
+                            <div className={classes.options}>
                                 <IconButton>
                                     <MoreVertIcon onClick={handleClick} />
                                 </IconButton>
@@ -143,30 +149,40 @@ function Card(props) {
                                     keepMounted
                                     open={Boolean(anchorEl)}
                                     onClose={handleClose} >
-                                    <MenuItem onClick={() => history.push(`/services/${serviceData.serviceId}/edit`)}>Edit</MenuItem>
-                                    <MenuItem onClick={openDialogToggle}>Delete</MenuItem>
+                                    <MenuItem onClick={evt => {
+                                        evt.stopPropagation();
+                                        history.push(`/services/${serviceData.serviceId}/edit`)
+                                    }}>
+                                        Edit
+                                    </MenuItem>
+                                    <MenuItem onClick={evt => {
+                                        evt.stopPropagation();
+                                        openDialogToggle()
+                                    }}>
+                                        Delete
+                                    </MenuItem>
                                 </Menu>
                             </div>
                         }
                         {serviceData.images && serviceData.images.map((image, index) => {
                             return (
-                            <div className={index === currentImage ? classes.slideActive : classes.slide} key={index}>
-                                {index === currentImage && (<img src={image} />)}
-                            </div>
+                                <div className={index === currentImage ? classes.slideActive : classes.slide} key={index}>
+                                    {index === currentImage && (<img src={image} />)}
+                                </div>
                             )
                         })}
                         <div className={classes.slideButtons}>
-                            <div onClick={previousImage}><NavigateBeforeIcon style={{ transform: "scale(2)", color: "white" }} /></div>
-                            <div onClick={nextImage}><NavigateNextIcon style={{ transform: "scale(2)", color: "white" }} /></div>
+                            <div onClick={previousImage}><NavigateBeforeIcon /></div>
+                            <div onClick={nextImage}><NavigateNextIcon /></div>
                         </div>
                     </div>
-                    <div className={classes.supplierBar}>
+                    <div className={classes.sellerBar}>
                         <Avatar src={sellerData.photoUrl} onClick={() => history.push(`/user-info/${serviceData.sellerId}`)} className={classes.avatar} />
-                        <div className={classes.supplierDetails}>
-                            <div className={classes.supplierName}>
+                        <div onClick={() => history.push(`/user-info/${serviceData.sellerId}`)}>
+                            <div className={classes.sellerName}>
                                 {sellerData.firstname} {sellerData.lastname}
                             </div>
-                            <div className={classes.supplierTitle}>
+                            <div className={classes.serviceTitle}>
                                 {serviceData.category}
                             </div>
                         </div>
@@ -184,7 +200,7 @@ function Card(props) {
 
                     </div>
                     <Divider />
-                    <footer className={classes.footer}>
+                    <footer className={classes.footer} onClick={() => fullServiceInfo(serviceData.serviceId)}>
                         {loggedUser ?
                             <IconButton onClick={handleFavorite}>
                                 <FavoriteIcon style={{ color: loggedUser.favorites && loggedUser.favorites.includes(serviceData.serviceId) ? "red" : null }} />

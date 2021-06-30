@@ -11,16 +11,19 @@ export default {
         }
     },
     container: {
-        width: "65%",
+        width: "70%",
         color: "#525252",
         [sizes.down("xxxl")]: {
-            width: "85%",
-        },
-        [sizes.down("lg")]: {
             width: "90%",
         },
-        [sizes.down("md")]: {
+        [sizes.down("xl")]: {
             width: "75%",
+        },
+        [sizes.down("lg")]: {
+            width: "95%",
+        },
+        [sizes.down("md")]: {
+            width: "80%",
         },
         [sizes.down("sm")]: {
             width: "60%",
@@ -30,10 +33,9 @@ export default {
         boxSizing: "border-box",
         width: "100%",
         display: "grid",
-        justifyContent: "center",
         alignItems: "center",
         gridTemplateColumns: "repeat(4, 25%)",
-        gridGap: "1rem",
+        // gridGap: "1rem",
         marginTop: "2rem",
         marginBottom: "2rem",
         [sizes.down("xl")]: {
@@ -44,7 +46,6 @@ export default {
         },
         [sizes.down("sm")]: {
             gridTemplateColumns: "repeat(1, 100%)",
-            gridGap: "0rem",
         },
     },
     title:{

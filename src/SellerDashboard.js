@@ -1,11 +1,9 @@
 import React, { Fragment } from 'react';
 import SoldService from './SoldService';
-// import { SortableContainer } from 'react-sortable-hoc';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
+import { Divider } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 import styles from './styles/SellerDashboardStyles';
-import { Divider } from '@material-ui/core';
 
 function SellerDashboard(props) {
     const { classes, sellerSales, users, services, editPurchase } = props;
@@ -13,11 +11,36 @@ function SellerDashboard(props) {
         <Fragment>
             {sellerSales &&
                 <div className={classes.root}>
-                    <TransitionGroup className={classes.stageContainer}>
-                        <div className={classes.stageTitle}>Not Started</div>
-                        <div className={classes.solds}>
+                    <div className={classes.title}>Sold Services</div>
+                    <div className={classes.subtitle}>Move service forward / backward according to your progress</div>
+                    <Divider style={{ marginBottom: "2rem" }} />
+                    <div className={classes.container}>
+                        <TransitionGroup className={classes.stageContainer}>
+                            <div className={classes.stageTitle}>Not Started</div>
+                            <div className={classes.solds}>
+                                {sellerSales.map((sale, i) => {
+                                    if (sale.progressStage === 0) {
+                                        return <CSSTransition key={i} timeout={300} classNames="fade">
+                                            <SoldService
+                                                editPurchase={editPurchase}
+                                                key={sale.purchaseId}
+                                                index={i}
+                                                users={users}
+                                                services={services}
+                                                sale={sale}
+                                                progressStage={sale.progressStage}
+                                                category={sale.serviceCategory}
+                                            />
+                                        </CSSTransition>
+                                    }
+                                }
+                                )}
+                            </div>
+                        </TransitionGroup>
+                        <TransitionGroup className={classes.stageContainer}>
+                            <div className={classes.stageTitle}>In Progress</div>
                             {sellerSales.map((sale, i) => {
-                                if (sale.progressStage === 0) {
+                                if (sale.progressStage === 1) {
                                     return <CSSTransition key={i} timeout={300} classNames="fade">
                                         <SoldService
                                             editPurchase={editPurchase}
@@ -33,68 +56,48 @@ function SellerDashboard(props) {
                                 }
                             }
                             )}
-                        </div>
-                    </TransitionGroup>
-                    <TransitionGroup className={classes.stageContainer}>
-                        <div className={classes.stageTitle}>In Progress</div>
-                        {sellerSales.map((sale, i) => {
-                            if (sale.progressStage === 1) {
-                                return <CSSTransition key={i} timeout={300} classNames="fade">
-                                    <SoldService
-                                        editPurchase={editPurchase}
-                                        key={sale.purchaseId}
-                                        index={i}
-                                        users={users}
-                                        services={services}
-                                        sale={sale}
-                                        progressStage={sale.progressStage}
-                                        category={sale.serviceCategory}
-                                    />
-                                </CSSTransition>
+                        </TransitionGroup>
+                        <TransitionGroup className={classes.stageContainer}>
+                            <div className={classes.stageTitle}>Almost Complete</div>
+                            {sellerSales.map((sale, i) => {
+                                if (sale.progressStage === 2) {
+                                    return <CSSTransition key={i} timeout={300} classNames="fade">
+                                        <SoldService
+                                            editPurchase={editPurchase}
+                                            key={sale.purchaseId}
+                                            index={i}
+                                            users={users}
+                                            services={services}
+                                            sale={sale}
+                                            progressStage={sale.progressStage}
+                                            category={sale.serviceCategory}
+                                        />
+                                    </CSSTransition>
+                                }
                             }
-                        }
-                        )}
-                    </TransitionGroup>
-                    <TransitionGroup className={classes.stageContainer}>
-                        <div className={classes.stageTitle}>Almost Complete</div>
-                        {sellerSales.map((sale, i) => {
-                            if (sale.progressStage === 2) {
-                                return <CSSTransition key={i} timeout={300} classNames="fade">
-                                    <SoldService
-                                        editPurchase={editPurchase}
-                                        key={sale.purchaseId}
-                                        index={i}
-                                        users={users}
-                                        services={services}
-                                        sale={sale}
-                                        progressStage={sale.progressStage}
-                                        category={sale.serviceCategory}
-                                    />
-                                </CSSTransition>
+                            )}
+                        </TransitionGroup>
+                        <TransitionGroup className={classes.stageContainer}>
+                            <div className={classes.stageTitle}>Completed</div>
+                            {sellerSales.map((sale, i) => {
+                                if (sale.progressStage === 3) {
+                                    return <CSSTransition key={i} timeout={300} classNames="fade">
+                                        <SoldService
+                                            editPurchase={editPurchase}
+                                            key={sale.purchaseId}
+                                            index={i}
+                                            users={users}
+                                            services={services}
+                                            sale={sale}
+                                            progressStage={sale.progressStage}
+                                            category={sale.serviceCategory}
+                                        />
+                                    </CSSTransition>
+                                }
                             }
-                        }
-                        )}
-                    </TransitionGroup>
-                    <TransitionGroup className={classes.stageContainer}>
-                        <div className={classes.stageTitle}>Completed</div>
-                        {sellerSales.map((sale, i) => {
-                            if (sale.progressStage === 3) {
-                                return <CSSTransition key={i} timeout={300} classNames="fade">
-                                    <SoldService
-                                        editPurchase={editPurchase}
-                                        key={sale.purchaseId}
-                                        index={i}
-                                        users={users}
-                                        services={services}
-                                        sale={sale}
-                                        progressStage={sale.progressStage}
-                                        category={sale.serviceCategory}
-                                    />
-                                </CSSTransition>
-                            }
-                        }
-                        )}
-                    </TransitionGroup>
+                            )}
+                        </TransitionGroup>
+                    </div>
                 </div>
             }
         </Fragment>

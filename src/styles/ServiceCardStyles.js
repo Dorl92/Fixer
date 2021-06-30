@@ -32,6 +32,9 @@ export default {
             width: "100%",
             height: "100%",
             borderRadius: "2px",
+        },
+        "&:hover": {
+            cursor: "pointer"
         }
     },
     slideButtons: {
@@ -48,38 +51,43 @@ export default {
         opacity: "0",
         transition: "all 0.2s ease-in-out",
         "& svg": {
-            padding: "0.5rem"
+            padding: "0.5rem",
+            transform: "scale(2)",
+            color: "white"
         },
         "&:hover svg": {
-            cursor: "pointer"
+            cursor: "pointer",
         },
         "&:hover": {
-            opacity: "1"
+            opacity: "1",
         },
     },
-    more: {
+    options: {
         position: "absolute",
         width: "300px",
         display: "flex",
         justifyContent: "flex-end",
         zIndex: 10,
         "& button": {
-            color: "black"
+            color: "black",
+            transform: "scale(1.25)"
         }
     },
-    supplierBar: {
+    sellerBar: {
         display: "flex",
         alignItems: "center",
         height: "10%",
-        padding: "0.7rem 1.2rem 1rem",
-
+        padding: "0.7rem 1.2rem 1rem"
     },
-    supplierName: {
+    sellerName: {
         padding: "0 0.5rem",
         fontSize: "17px",
-        fontWeight: "500"
+        fontWeight: "500",
+        "&:hover": {
+            cursor: "pointer"
+        }
     },
-    supplierTitle: {
+    serviceTitle: {
         padding: "0 0.5rem",
         color: "gray",
         fontSize: "14px",
@@ -119,6 +127,9 @@ export default {
         alignItems: "center",
         justifyContent: "space-between",
         zIndex: 10,
+        "&:hover": {
+            cursor: "pointer"
+        }
     },
     price: {
         padding: "0 1rem",
