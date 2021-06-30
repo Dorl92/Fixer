@@ -19,7 +19,7 @@ import { Fragment } from 'react';
 import NewPurchaseForm from './NewPurchaseForm';
 
 function ServiceInfo(props) {
-    const { classes, history, match, addNewReview, removeReview, editService, addNewPurchase } = props;
+    const { classes, history, match, addNewReview, removeReview, editService, addNewPurchase, purchasesLength } = props;
 
     const serviceId = match.params.serviceId;
 
@@ -164,6 +164,7 @@ function ServiceInfo(props) {
                 </div>
             }
             <NewPurchaseForm
+                purchasesLength={purchasesLength}
                 serviceData={serviceData}
                 sellerData={sellerData}
                 addNewPurchase={addNewPurchase}

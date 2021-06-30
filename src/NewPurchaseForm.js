@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 function NewPurchaseForm(props) {
-    const { classes, history, serviceData, sellerData, addNewPurchase, openDialog, openDialogToggle } = props;
+    const { classes, serviceData, sellerData, addNewPurchase, openDialog, openDialogToggle, purchasesLength } = props;
 
     const { loggedUser } = useAuth();
 
@@ -72,6 +72,7 @@ function NewPurchaseForm(props) {
         const deliveryDate = formatDate(addDays(purchaseDate, plan.daysToDelivery))
         const newPurchase = {
             purchaseId: uuidv4(),
+            index: purchasesLength + 1,
             serviceId: serviceData.serviceId,
             sellerId: sellerData.userId,
             userId: loggedUser.userId,
@@ -93,8 +94,8 @@ function NewPurchaseForm(props) {
                     <div className={classes.serviceName}>Purchase Service- <strong>{serviceData.title}</strong></div>
                     <div className={classes.sellerName}>Seller Name- <strong>{sellerData.username}</strong></div>
                     <ValidatorForm className={classes.form} onSubmit={handleSubmit}>
-                        <FormLabel style={{fontFamily: "Nunito"}} component="legend">Select Price Plan</FormLabel>
-                        <RadioGroup  aria-label="pricePlan" name="pricePlan" value={pricePlan} onChange={handlePricePlanChange}>
+                        <FormLabel style={{ fontFamily: "Nunito" }} component="legend">Select Price Plan</FormLabel>
+                        <RadioGroup aria-label="pricePlan" name="pricePlan" value={pricePlan} onChange={handlePricePlanChange}>
                             <FormControlLabel value="basic" control={<Radio color="primary" />} label={basic} />
                             <FormControlLabel value="standard" control={<Radio color="primary" />} label={standard} />
                             <FormControlLabel value="premium" control={<Radio color="primary" />} label={premium} />

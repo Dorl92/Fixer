@@ -6,6 +6,9 @@ import styles from './styles/PurchaseServiceListStyles';
 
 function PurchaseServiceList(props) {
     const { classes, userPurchases, users, services, editPurchase } = props;
+    userPurchases.sort(function (a, b) {
+        return a.index - b.index;
+    })
     return (
         <div className={classes.purchases}>
             {userPurchases.map((purchase, i) =>

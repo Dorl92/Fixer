@@ -53,7 +53,7 @@ function App() {
     }
     fetchData();
   }, []);
- 
+
   const searchData = new Set();
 
   if (services) {
@@ -129,6 +129,7 @@ function App() {
                     removeReview={removeReview}
                     addNewReview={addNewReview}
                     editService={editService}
+                    purchasesLength={purchases && purchases.length}
                     service={findService(routePros.match.params.serviceId)} /></Page>}
               />
               {loggedUser &&

@@ -62,7 +62,6 @@ function UserInfo(props) {
                 const data = snapshot.val();
                 const allPurchases = data && Object.values(data)
                 if (allPurchases) {
-                    console.log("test")
                     const sellerSales = allPurchases.filter(purchase => purchase.sellerId === userId)
                     setSellerSales(sellerSales)
                     const userPurchases = allPurchases.filter(purchase => purchase.userId === userId)
@@ -146,7 +145,18 @@ function UserInfo(props) {
     }
 
     const onSortEnd = ({ oldIndex, newIndex }) => {
-        setUserPurchases((arrayMove(userPurchases, oldIndex, newIndex)))
+        let updatedIndex;
+        if (newIndex === 0) {
+            updatedIndex = userPurchases[0].index / 2;
+        }
+        else if (newIndex === userPurchases.length - 1) {
+            updatedIndex = userPurchases[newIndex].index + 1;
+        } else if (newIndex > oldIndex) {
+            updatedIndex = (userPurchases[newIndex].index + userPurchases[newIndex + 1].index) / 2;
+        } else {
+            updatedIndex = (userPurchases[newIndex].index + userPurchases[newIndex - 1].index) / 2;
+        }
+        editPurchase({ ...userPurchases[oldIndex], index: updatedIndex }, userPurchases[oldIndex].purchaseId)
     }
 
     return (
@@ -286,13 +296,13 @@ function UserInfo(props) {
                                     editPurchase={editPurchase}
                                 /> : null
                             }
-                            {loggedUser.isSeller &&
+                            {loggedUser.isSeller && sellerSales.length ?
                                 <SellerDashboard
                                     sellerSales={sellerSales}
                                     users={users}
                                     services={services}
                                     editPurchase={editPurchase}
-                                />
+                                /> : null
                             }
                         </div>
                     }
