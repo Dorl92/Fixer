@@ -3,7 +3,8 @@ import { useAuth } from './contexts/authContext';
 import { Route, Switch } from 'react-router-dom';
 import { database } from "./firebase";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 import Page from './Page';
 import useServicesState from './hooks/useServicesState';
 import useUsersState from './hooks/useUsersState';
@@ -66,116 +67,122 @@ function App() {
   const findService = (id) => {
     return services.find(service => service.serviceId === id);
   };
-
+  const THEME = createMuiTheme({
+    typography: {
+      "fontFamily": `"Nunito", sans-serif`,
+    }
+  });
   return (
-    <div className="App">
-      <Route render={({ location }) => (
-        <TransitionGroup>
-          <CSSTransition key={location.key} timeout={500} classNames="Page">
-            <Switch location={location}>
-              <Route exact path="/" render={(routePros) =>
-                <Page>
-                  <Home
-                    {...routePros}
-                    searchData={Array.from(searchData)} /></Page>}
-              />
-              {loggedUser && loggedUser.isSeller &&
-                <Route exact path="/services/new" render={(routePros) =>
+    <ThemeProvider theme={THEME}>
+      <div className="App">
+        <Route render={({ location }) => (
+          <TransitionGroup>
+            <CSSTransition key={location.key} timeout={500} classNames="Page">
+              <Switch location={location}>
+                <Route exact path="/" render={(routePros) =>
                   <Page>
-                    <NewServiceForm
+                    <Home
                       {...routePros}
-                      addNewService={addNewService}
-                      services={services}
-                      loggedUser={loggedUser} /></Page>}
+                      searchData={Array.from(searchData)} /></Page>}
                 />
-              }
-              {!loggedUser &&
-                <Route exact path="/signup" render={(routePros) =>
+                {loggedUser && loggedUser.isSeller &&
+                  <Route exact path="/services/new" render={(routePros) =>
+                    <Page>
+                      <NewServiceForm
+                        {...routePros}
+                        addNewService={addNewService}
+                        services={services}
+                        loggedUser={loggedUser} /></Page>}
+                  />
+                }
+                {!loggedUser &&
+                  <Route exact path="/signup" render={(routePros) =>
+                    <Page>
+                      <Signup
+                        addNewUser={addNewUser}
+                        {...routePros} /></Page>}
+                  />
+                }
+                <Route exact path="/signup/new-seller" render={(routePros) =>
                   <Page>
-                    <Signup
-                      addNewUser={addNewUser}
-                      {...routePros} /></Page>}
+                    <NewSellerForm
+                      {...routePros}
+                      addNewSeller={addNewSeller} /></Page>}
                 />
-              }
-              <Route exact path="/signup/new-seller" render={(routePros) =>
-                <Page>
-                  <NewSellerForm
-                    {...routePros}
-                    addNewSeller={addNewSeller} /></Page>}
-              />
-              {!loggedUser &&
-                <Route exact path="/login" render={(routePros) =>
+                {!loggedUser &&
+                  <Route exact path="/login" render={(routePros) =>
+                    <Page>
+                      <Login
+                        {...routePros} /></Page>}
+                  />
+                }
+                <Route exact path="/services" render={(routePros) =>
                   <Page>
-                    <Login
-                      {...routePros} /></Page>}
-                />
-              }
-              <Route exact path="/services" render={(routePros) =>
-                <Page>
-                  <ServicesList
-                    {...routePros}
-                    services={services}
-                    purchases={purchases}
-                    removePurchase={removePurchase}
-                    removeService={removeService}
-                    editUser={editUser} /></Page>}
-              />
-              <Route exact path="/services/:serviceId/info" render={(routePros) =>
-                <Page>
-                  <ServiceInfo
-                    {...routePros}
-                    reviews={reviews}
-                    addNewPurchase={addNewPurchase}
-                    removeReview={removeReview}
-                    addNewReview={addNewReview}
-                    editService={editService}
-                    purchasesLength={purchases && purchases.length}
-                    service={findService(routePros.match.params.serviceId)} /></Page>}
-              />
-              {loggedUser &&
-                <Route exact path="/favorites" render={(routePros) =>
-                  <Page>
-                    <FavoritesServices
+                    <ServicesList
                       {...routePros}
                       services={services}
+                      purchases={purchases}
+                      removePurchase={removePurchase}
                       removeService={removeService}
                       editUser={editUser} /></Page>}
                 />
-              }
-              <Route exact path="/services/:id/edit" render={(routePros) =>
-                <Page>
-                  <EditServiceForm
-                    {...routePros}
-                    services={services}
-                    serviceToEdit={findService(routePros.match.params.id)}
-                    editService={editService} /></Page>}
-              />
-              <Route exact path="/services/:category" render={(routePros) =>
-                <Page>
-                  <ServicesList
-                    {...routePros}
-                    editUser={editUser}
-                    services={services}
-                    purchases={purchases}
-                    removePurchase={removePurchase}
-                    category={routePros.match.params.category}
-                    removeService={removeService} /></Page>}
-              />
-              <Route exact path="/user-info/:userId" render={(routePros) =>
-                <Page>
-                  <UserInfo
-                    {...routePros}
-                    services={services}
-                    users={users}
-                    editPurchase={editPurchase}
-                    editUser={editUser}
-                  /></Page>}
-              />
-            </Switch>
-          </CSSTransition>
-        </TransitionGroup>
-      )} />
-    </div>
+                <Route exact path="/services/:serviceId/info" render={(routePros) =>
+                  <Page>
+                    <ServiceInfo
+                      {...routePros}
+                      reviews={reviews}
+                      addNewPurchase={addNewPurchase}
+                      removeReview={removeReview}
+                      addNewReview={addNewReview}
+                      editService={editService}
+                      purchasesLength={purchases && purchases.length}
+                      service={findService(routePros.match.params.serviceId)} /></Page>}
+                />
+                {loggedUser &&
+                  <Route exact path="/favorites" render={(routePros) =>
+                    <Page>
+                      <FavoritesServices
+                        {...routePros}
+                        services={services}
+                        removeService={removeService}
+                        editUser={editUser} /></Page>}
+                  />
+                }
+                <Route exact path="/services/:id/edit" render={(routePros) =>
+                  <Page>
+                    <EditServiceForm
+                      {...routePros}
+                      services={services}
+                      serviceToEdit={findService(routePros.match.params.id)}
+                      editService={editService} /></Page>}
+                />
+                <Route exact path="/services/:category" render={(routePros) =>
+                  <Page>
+                    <ServicesList
+                      {...routePros}
+                      editUser={editUser}
+                      services={services}
+                      purchases={purchases}
+                      removePurchase={removePurchase}
+                      category={routePros.match.params.category}
+                      removeService={removeService} /></Page>}
+                />
+                <Route exact path="/user-info/:userId" render={(routePros) =>
+                  <Page>
+                    <UserInfo
+                      {...routePros}
+                      services={services}
+                      users={users}
+                      editPurchase={editPurchase}
+                      editUser={editUser}
+                    /></Page>}
+                />
+              </Switch>
+            </CSSTransition>
+          </TransitionGroup>
+        )} />
+      </div>
+    </ThemeProvider>
   );
 }
 

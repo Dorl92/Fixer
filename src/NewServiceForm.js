@@ -110,9 +110,11 @@ function NewServiceForm(props) {
     return (
         <Layout>
             <section className={classes.root}>
-                <h2>Add New Service</h2>
-                <p>Please add some details for your service</p>
-                <Divider />
+                <div className={classes.header}>
+                    <h2>Add New Service</h2>
+                    <p>Please add some details for your service</p>
+                    <Divider />
+                </div>
                 <ValidatorForm onSubmit={submitNewService} className={classes.form}>
                     <TextValidator
                         value={title}

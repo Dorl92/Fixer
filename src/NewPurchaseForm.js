@@ -10,6 +10,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
+import { Divider } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 function NewPurchaseForm(props) {
@@ -91,10 +92,11 @@ function NewPurchaseForm(props) {
         <Dialog open={openDialog} onClose={openDialogToggle} fullWidth>
             {serviceData && sellerData &&
                 <section className={classes.root}>
-                    <div className={classes.serviceName}>Purchase Service- <strong>{serviceData.title}</strong></div>
-                    <div className={classes.sellerName}>Seller Name- <strong>{sellerData.username}</strong></div>
+                    <div className={classes.serviceName}><strong>{serviceData.title}</strong></div>
+                    <div className={classes.sellerName}>By <strong>{sellerData.username}</strong></div>
                     <ValidatorForm className={classes.form} onSubmit={handleSubmit}>
-                        <FormLabel style={{ fontFamily: "Nunito" }} component="legend">Select Price Plan</FormLabel>
+                        <Divider />
+                        <FormLabel style={{ fontFamily: "Nunito", marginTop: "1.5rem"}} component="legend">Select Price Plan</FormLabel>
                         <RadioGroup aria-label="pricePlan" name="pricePlan" value={pricePlan} onChange={handlePricePlanChange}>
                             <FormControlLabel value="basic" control={<Radio color="primary" />} label={basic} />
                             <FormControlLabel value="standard" control={<Radio color="primary" />} label={standard} />

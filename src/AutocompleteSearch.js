@@ -20,8 +20,8 @@ function AutocompleteSearch(props) {
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        speed: 1000,
-        autoplaySpeed: 3000,
+        speed: 1500,
+        autoplaySpeed: 10000,
         cssEase: "linear"
     };
 

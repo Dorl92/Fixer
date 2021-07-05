@@ -47,7 +47,7 @@ function Home(props) {
                 <div className={classes.sliderTitle}>Some of our popular services</div>
                 <Slider {...settings} className={classes.slider}>
                     <div>
-                        <h4><small>Engage your audience</small>Video</h4>
+                        <h4><small>Engage audience</small>Video</h4>
                         <img src={video} onClick={() => history.push("/services/video editing")} />
                     </div>
                     <div>
@@ -67,7 +67,7 @@ function Home(props) {
                         <img src={music} onClick={() => history.push("/services/sound design")} />
                     </div>
                     <div>
-                        <h4><small>Reach more customers</small>Social Media</h4>
+                        <h4><small>Reach customers</small>Social Media</h4>
                         <img src={socialMedia} onClick={() => history.push("/services/social media")} />
                     </div>
                 </Slider>

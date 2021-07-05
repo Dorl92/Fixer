@@ -5,24 +5,38 @@ export default{
         width: "30%",
         color: "#525252",
         fontWeight: "300",
-        marginTop: "2rem",
-        "& h2": {
-            fontWeight: "500",
+        boxShadow: " 0px 3px 25px -10px rgba(111,120,111,1)",
+        borderRadius: "20px",
+        padding: "1.5rem 0",
+        margin: "3rem 0",
+        [sizes.down("xxxl")]: {
+            width: "35%",
         },
-        [sizes.down("xl")]: {
+        [sizes.down("xxl")]: {
             width: "40%",
         },
-        [sizes.down("md")]: {
+        [sizes.down("xl")]: {
+            width: "45%",
+        },
+        [sizes.down("lg")]: {
             width: "50%",
+        },
+        [sizes.down("md")]: {
+            width: "55%",
         },
         [sizes.down("sm")]: {
             width: "65%",
         },
     },
+    header: {
+        width: "75%",
+        marginLeft: "auto",
+        marginRight: "auto"
+    },
     form: {
         display: "flex",
         alignItems: "center",
-        width: "60%",
+        width: "50%",
         flexDirection: "column",
         margin: "1rem auto 2rem auto",
         "& div":{

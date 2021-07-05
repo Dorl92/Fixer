@@ -116,9 +116,11 @@ function EditServiceForm(props) {
         <Layout>
             {serviceToEdit ?
                 <section className={classes.root}>
-                    <h2>Edit Your Service</h2>
-                    <p>Please update your service details</p>
-                    <Divider />
+                    <div className={classes.header}>
+                        <h2>Edit Your Service</h2>
+                        <p>Please update your service details</p>
+                        <Divider />
+                    </div>
                     <ValidatorForm onSubmit={submitNewService} className={classes.form}>
                         <TextValidator
                             value={title}

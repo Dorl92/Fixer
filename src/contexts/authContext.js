@@ -1,17 +1,32 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { auth, database } from "../firebase";
 
-const AuthContext = React.createContext();
+const AuthContext = createContext();
 
 export function useAuth() {
   return useContext(AuthContext);
 }
 
 export const AuthProvider = ({ children }) => {
+
   const [currentUser, setCurrentUser] = useState();
   const [loggedUser, setLoggedUser] = useState();
+  const [loading, setLoading] = useState(true);
 
-  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user)
+      if (user) {
+        database.ref('users/' + user.uid)
+          .on('value', (snapshot) => {
+            const data = snapshot.val();
+            setLoggedUser(data)
+          })
+      }
+      setLoading(false)
+    })
+    return unsubscribe;
+  }, []);
 
   async function signup(email, password, username, photoUrl) {
     const createUser = await auth.createUserWithEmailAndPassword(email, password)
@@ -42,21 +57,6 @@ export const AuthProvider = ({ children }) => {
       photoURL: newPhotoURL
     })
   }
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user)
-      if (user) {
-        database.ref('users/' + user.uid)
-          .on('value', (snapshot) => {
-            const data = snapshot.val();
-            setLoggedUser(data)
-          })
-      }
-      setLoading(false)
-    })
-    return unsubscribe;
-  }, []);
 
   const value = {
     currentUser,

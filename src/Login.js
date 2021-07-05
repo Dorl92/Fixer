@@ -39,9 +39,11 @@ function Login(props) {
     return (
         <Layout>
             <section className={classes.root}>
-                <h2>Log In</h2>
-                <p>Please log in yo your account to start explore our services</p>
-                <Divider />
+                <div className={classes.header}>
+                    <h2>Log In</h2>
+                    <p>Please log in yo your account to start explore our services</p>
+                    <Divider />
+                </div>
                 {error && <Alert severity="error">{error}</Alert>}
                 <ValidatorForm onSubmit={handleSubmit} className={classes.form}>
                     <TextValidator
@@ -57,26 +59,26 @@ function Login(props) {
                         onChange={changePassword}
                         type="password"
                         margin="normal"
-                        label="Enter Your Password" 
+                        label="Enter Your Password"
                         validators={['required']}
                         errorMessages={['Password is required']} />
-                        <Button
-                            variant="contained"
-                            disabled={loading}
-                            style={{ width: "50%", backgroundColor: "#23775a", color: "white", marginTop: "2rem" }}
-                            type="submit">
-                            {loading ?
-                                <div className={classes.spinner}>
-                                    <Loader
-                                        type="TailSpin"
-                                        color="rgb(250, 250, 250)"
-                                        height={20}
-                                        width={20}
-                                        timeout={10000} 
-                                    />
-                                </div> :
-                                'Log In'}
-                        </Button>
+                    <Button
+                        variant="contained"
+                        disabled={loading}
+                        style={{ width: "50%", backgroundColor: "#23775a", color: "white", marginTop: "2rem" }}
+                        type="submit">
+                        {loading ?
+                            <div className={classes.spinner}>
+                                <Loader
+                                    type="TailSpin"
+                                    color="rgb(250, 250, 250)"
+                                    height={20}
+                                    width={20}
+                                    timeout={10000}
+                                />
+                            </div> :
+                            'Log In'}
+                    </Button>
                 </ValidatorForm>
                 <div className={classes.needAccount}>
                     Need an account?<Link to="/signup">Sign Up</Link>

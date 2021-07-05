@@ -84,9 +84,11 @@ function Signup(props) {
     return (
         <Layout>
             <section className={classes.root}>
-                <h2>Sign Up</h2>
-                <p>Please fill a short & basic info to create your account</p>
-                <Divider />
+                <div className={classes.header}>
+                    <h2>Sign Up</h2>
+                    <p>Please fill a short & basic info to create your account</p>
+                    <Divider />
+                </div>
                 {error && <Alert severity="error">{error}</Alert>}
                 <ValidatorForm onSubmit={handleSignup} className={classes.form}>
                     <TextValidator

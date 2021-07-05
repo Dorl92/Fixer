@@ -8,9 +8,10 @@ export default {
         borderRadius: "4px",
         backgroundColor: "rgb(240, 240, 240)",
         margin: "0.2rem 0",
-        "&:hover":{
-            cursor: "pointer"
-        }
+        "&:hover": {
+            cursor: "pointer",
+            backgroundColor: "rgb(226, 226, 226)",
+        },
     },
     categoryColor: {
         width: "0.6%",
@@ -21,7 +22,7 @@ export default {
         width: "35%",
         margin: "0 0.5rem",
     },
-    subcategory:{
+    subcategory: {
         width: "25%"
     },
     tab: {
@@ -33,28 +34,28 @@ export default {
         padding: "1px 12px",
         margin: "3px 0px"
     },
-    sellerImage:{
+    sellerImage: {
         margin: "0 0.5rem",
         width: "35px",
         height: "35px",
-        "&:hover":{
+        "&:hover": {
             cursor: "pointer"
         }
     },
-    deliveryDate:{
+    deliveryDate: {
         width: "15%",
         marginLeft: "1rem",
         marginRight: "1rem",
         fontSize: "14px",
         color: "#727474"
     },
-    progress:{
+    progress: {
         height: "100%",
         width: "10%",
         marginLeft: "auto",
         display: "flex"
     },
-    circle:{
+    circle: {
         height: "70%",
         marginTop: "auto",
         marginBottom: "auto",

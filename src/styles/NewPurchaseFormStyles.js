@@ -20,7 +20,6 @@ export default{
     },
     sellerName:{
         fontSize: "18px",
-        marginBottom: "1rem"
     },
     description: {
         display: "flex",

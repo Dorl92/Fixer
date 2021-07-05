@@ -1,6 +1,18 @@
 import sizes from './sizes';
 
 export default {
+    "@global": {
+        ".slick-prev": {
+            "&:before": {
+                color: "black",
+            }
+        },
+        ".slick-next": {
+            "&:before": {
+                color: "black"
+            }
+        }
+    },
     container: {
         width: "50%",
         dispaly: "flex",
@@ -18,8 +30,8 @@ export default {
         margin: "0 auto 5rem auto",
         width: "90%",
         "& img": {
-            width: "265px",
-            height: "370px",
+            width: "270px",
+            height: "375px",
             borderRadius: "5px",
             cursor: "pointer",
             transition: "all 0.2s ease-in-out",
@@ -31,23 +43,26 @@ export default {
             position: "absolute",
             display: "flex",
             flexDirection: "column",
-            marginLeft: "0.8rem",
-            marginTop: "1rem",
+            marginLeft: "1.5rem",
+            marginTop: "1.5rem",
             zIndex: "10",
-            fontSize: "26px",
+            fontSize: "30px",
             color: "rgb(250, 250, 250)",
             "& small": {
-                fontSize: "18px",
-                fontWeight: "300"
+                fontSize: "16px",
+                fontWeight: "300",
             }
         },
         [sizes.down("xxxl")]: {
             "& img": {
-                width: "225px",
-                height: "308px",
+                width: "240px",
+                height: "330px",
             }
         },
         [sizes.down("xxl")]: {
+            "& h4": {
+                fontSize: "26px",
+            },
             "& img": {
                 width: "210px",
                 height: "287px",
@@ -62,8 +77,8 @@ export default {
         [sizes.down("lg")]: {
             width: "95%",
             "& img": {
-                width: "160px",
-                height: "230px",
+                width: "175px",
+                height: "240px",
             }
         },
         [sizes.down("md")]: {
@@ -71,13 +86,13 @@ export default {
         },
     },
     sliderTitle: {
-        marginLeft: "12.5%",
+        marginLeft: "6%",
         marginBottom: "1.5rem",
         fontSize: "45px",
         fontWeight: "600",
         color: "#525252",
         [sizes.down("xxl")]: {
-            marginLeft: "8%",
+            marginLeft: "5%",
         },
         [sizes.down("xl")]: {
             fontSize: "35px",
@@ -140,11 +155,11 @@ export default {
             fontSize: "34px",
             fontWeight: "200"
         },
-         [sizes.down("md")]: {
+        [sizes.down("md")]: {
             width: "100%",
             padding: "1rem 0",
-            "& p":{
-                width: "80%", 
+            "& p": {
+                width: "80%",
             }
         },
     },

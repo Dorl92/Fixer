@@ -11,7 +11,7 @@ export default {
         height: "120px",
         borderRadius: "4px",
         backgroundColor: "rgb(240, 240, 240)",
-        marginBottom: "0.3rem",
+        marginBottom: "0.5rem",
         "&:hover svg": {
             cursor: "pointer"
         }
