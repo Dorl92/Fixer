@@ -36,7 +36,6 @@ export default {
         alignItems: "center",
         gridTemplateColumns: "repeat(4, 25%)",
         // gridGap: "1rem",
-        marginTop: "2rem",
         marginBottom: "2rem",
         [sizes.down("xl")]: {
             gridTemplateColumns: "repeat(3, 33.3333%)",

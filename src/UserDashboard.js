@@ -1,11 +1,14 @@
 import React, { Fragment } from 'react';
-import { withStyles } from '@material-ui/styles';
-import styles from './styles/UserDashboardStyles';
-import { Divider } from '@material-ui/core';
+//components
 import PurchaseServiceList from './PurchaseServiceList';
+//style
+import styles from './styles/UserDashboardStyles';
+//material-ui
+import { withStyles } from '@material-ui/styles';
+import { Divider } from '@material-ui/core';
 
 function UserDashboard(props) {
-    const { classes, userPurchases, users, services, editPurchase, onSortEnd } = props;
+    const { classes, userPurchases, onSortEnd } = props;
     let legned = new Map();
     if (userPurchases) {
         userPurchases.map(purchase => {
@@ -67,9 +70,6 @@ function UserDashboard(props) {
                             distance={20}
                             onSortEnd={onSortEnd}
                             userPurchases={userPurchases}
-                            users={users}
-                            services={services}
-                            editPurchase={editPurchase}
                         />
                     </div>
                 </div>

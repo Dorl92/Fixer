@@ -11,7 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Fragment } from 'react';
  
 function Navbar(props) {
-  const { history, classes, searchData } = props;
+  const { history, classes } = props;
   const [error, setError] = useState("")
   const [navbarBackground, setNavbarBackground] = useState(false)
   const [navbarSearch, setNavbarSearch] = useState(false)
@@ -73,7 +73,7 @@ function Navbar(props) {
         </div>
         <div className={classes.authLinks}>
           <div className={classes.searchBar}>
-            {navbarSearch && <SearchBar searchData={searchData} navbar={true} />}
+            {navbarSearch && <SearchBar navbar={true} />}
           </div>
           {!loggedUser && <NavLink exact activeClassName={navbarBackground || history.location.pathname !== '/' ? classes.activeLinkScroll : classes.activeLink} to="/login">Log In</NavLink>}
           {!loggedUser && <NavLink exact activeClassName={navbarBackground || history.location.pathname !== '/' ? classes.activeLinkScroll : classes.activeLink} to="/signup">Sign Up</NavLink>}

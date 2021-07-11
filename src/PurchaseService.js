@@ -1,18 +1,27 @@
 import React, { Fragment } from 'react';
-import { withStyles } from '@material-ui/styles';
-import Avatar from '@material-ui/core/Avatar';
-import { SortableElement } from 'react-sortable-hoc';
 import { withRouter } from 'react-router-dom';
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+//contexts
+import { useServicesContext } from './contexts/servicesContext';
+import { useUsersContext } from './contexts/usersContext';
+//style
 import 'react-circular-progressbar/dist/styles.css';
 import styles from './styles/PurchaseServiceStyles';
+//components
+import { SortableElement } from 'react-sortable-hoc';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+//material-ui
+import { withStyles } from '@material-ui/styles';
+import Avatar from '@material-ui/core/Avatar';
 
 function PurchaseService(props) {
-    const { history, classes, purchase, progressStage, category, services, users } = props;
+    const { history, classes, purchase } = props;
 
-    let categoryColor = null;
+    const { services } = useServicesContext();
+    const { users } = useUsersContext();
+
+
     let progress = 10;
-    switch (progressStage) {
+    switch (purchase.progressStage) {
         case 0:
             break;
         case 1:
@@ -26,7 +35,8 @@ function PurchaseService(props) {
             break;
     }
 
-    switch (category) {
+    let categoryColor;
+    switch (purchase.serviceCategory) {
         case 'Graphics & Design':
             categoryColor = "#A22E2E";
             break;
@@ -59,7 +69,7 @@ function PurchaseService(props) {
 
     return (
         <Fragment>
-            {serviceData &&
+            {serviceData && sellerData &&
                 <div className={classes.container}>
                     <div style={{ backgroundColor: categoryColor }} className={classes.categoryColor}></div>
                     <div className={classes.title}>{serviceData.title}</div>

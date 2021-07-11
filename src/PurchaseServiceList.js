@@ -1,11 +1,14 @@
 import React from 'react';
+//components
 import PurchaseService from './PurchaseService';
-import { SortableContainer } from 'react-sortable-hoc'
-import { withStyles } from '@material-ui/styles';
+import { SortableContainer } from 'react-sortable-hoc';
+//style
 import styles from './styles/PurchaseServiceListStyles';
+//material-ui
+import { withStyles } from '@material-ui/styles';
 
 function PurchaseServiceList(props) {
-    const { classes, userPurchases, users, services, editPurchase } = props;
+    const { classes, userPurchases } = props;
     userPurchases.sort(function (a, b) {
         return a.index - b.index;
     })
@@ -13,14 +16,9 @@ function PurchaseServiceList(props) {
         <div className={classes.purchases}>
             {userPurchases.map((purchase, i) =>
                 <PurchaseService
-                    editPurchase={editPurchase}
+                    purchase={purchase}
                     key={purchase.purchaseId}
                     index={i}
-                    users={users}
-                    services={services}
-                    purchase={purchase}
-                    progressStage={purchase.progressStage}
-                    category={purchase.serviceCategory}
                 />
             )}
         </div>

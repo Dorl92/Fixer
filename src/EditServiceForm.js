@@ -1,23 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
-
+import { SERVICE_CATEGORIS_LIST, SERVICE_SUBCATEGORIS_LIST } from './utils/constants';
+//contexts
+import { useServicesContext } from './contexts/servicesContext';
+//hooks
+import useInputState from './hooks/useInputState';
+//components
+import Layout from './Layout';
 import Loader from 'react-loader-spinner';
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import { withStyles } from '@material-ui/styles';
+//style
 import styles from './styles/EditServiceFormStyles';
-import DeleteIcon from '@material-ui/icons/Delete';
-import { Fragment } from 'react';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Button from '@material-ui/core/Button';
-import { Divider } from '@material-ui/core';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+//material-ui
+import { withStyles } from '@material-ui/styles';
+import { Delete } from '@material-ui/icons';
+import { Divider, MenuItem, FormControl, Button } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
-import Layout from './Layout';
-import useInputState from './hooks/useInputState';
 
 function EditServiceForm(props) {
-    const { classes, services, serviceToEdit, editService, history, match } = props;
+    const { classes, history, match, serviceToEdit } = props;
+
+    const { editService } = useServicesContext();
 
     const [category, changeCategory, resetCategory, setCategory] = useInputState("");
     const [subcategory, changeSubcategory, resetSubcategory, setSubcategory] = useInputState("");
@@ -27,19 +31,8 @@ function EditServiceForm(props) {
     const [images, setImages] = useState([]);
 
     const [loadingUploadImage, setLoadingUploadImage] = useState(false);
-
     const [isImages, setIsImages] = useState(false);
     const [isDescription, setIsDescription] = useState(false);
-
-    const serviceCategoriesList = ["Graphics & Design", "Digital Marketing", "Writing & Translation", "Video & Animation", "Music & Audio", "Programming & Tech"];
-    const serviceSubCategoriesList = {
-        "Graphics & Design": ["Logo Design", "Business Cards", "Game Art", "Website Design", "Book Design", "Photoshop Editing", "Cartoons & Comics", "Other"],
-        "Digital Marketing": ["Social Media", "Content Marketing", "Video Marketing", "Web Analytics", "Music Promotion", "Other"],
-        "Writing & Translation": ["Articles", "Translation", "Book Editing", "Resume Writing", "Creative Writing", "Other"],
-        "Video & Animation": ["Video Editing", "Character Animation", "Visual Effects", "Book Traliers", "Drone Videography", "Other"],
-        "Music & Audio": ["Voice Over", "Session Musicians", "Songwriters", "Sound Design", "DJ Mixing", "Other"],
-        "Programming & Tech": ["Web Programming", "Game Deveopment", "Desktop Applications", "Mobile Apps", "User Testing", "Other"]
-    };
 
     useEffect(() => {
         if (serviceToEdit) {
@@ -142,7 +135,7 @@ function EditServiceForm(props) {
                                 onChange={changeCategory}
                                 validators={['required']}
                                 errorMessages={['This field is required']} >
-                                {serviceCategoriesList.map(category => <MenuItem value={category}>{category}</MenuItem>)}
+                                {SERVICE_CATEGORIS_LIST.map(category => <MenuItem value={category}>{category}</MenuItem>)}
                             </TextValidator>
                         </FormControl>
                         {category &&
@@ -157,7 +150,7 @@ function EditServiceForm(props) {
                                     onChange={changeSubcategory}
                                     validators={['required']}
                                     errorMessages={['This field is required']} >
-                                    {serviceSubCategoriesList[category].map(subcategory => <MenuItem value={subcategory}>{subcategory}</MenuItem>)}
+                                    {SERVICE_SUBCATEGORIS_LIST[category].map(subcategory => <MenuItem value={subcategory}>{subcategory}</MenuItem>)}
                                 </TextValidator>
                             </FormControl>
                         }
@@ -209,7 +202,7 @@ function EditServiceForm(props) {
                                                 <div className={classes.image}>
                                                     <img src={image} />
                                                     <section className={classes.deleteImageIcon} onClick={() => handleDeleteImage(image)} >
-                                                        <DeleteIcon />
+                                                        <Delete />
                                                     </section>
                                                 </div>
                                             ))}

@@ -1,27 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { database } from "./firebase";
-import { useAuth } from './contexts/authContext';
-import useToggle from './hooks/useToggle';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import Slider from "react-slick";
-
-import './styles/stylesheets/stars.css';
-import styles from './styles/ServiceInfoStyles';
-import Loader from 'react-loader-spinner';
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import { withStyles } from '@material-ui/styles';
-import Avatar from '@material-ui/core/Avatar';
+//components
 import ReviewForm from './ReviewForm';
 import Review from './Review';
-import { Divider } from '@material-ui/core';
 import Layout from './Layout';
-import { Fragment } from 'react';
 import NewPurchaseForm from './NewPurchaseForm';
+import Slider from "react-slick";
+import Loader from 'react-loader-spinner';
+//style
+import styles from './styles/ServiceInfoStyles';
+import './styles/stylesheets/stars.css';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+//contexts
+import { useAuth } from './contexts/authContext';
+//hooks
+import useToggle from './hooks/useToggle';
+//material-ui
+import { withStyles } from '@material-ui/styles';
+import { Divider, Avatar } from '@material-ui/core';
+
 
 function ServiceInfo(props) {
-    const { classes, history, match, addNewReview, removeReview, editService, addNewPurchase, purchasesLength } = props;
-
-    const serviceId = match.params.serviceId;
+    const { classes, history, match } = props;
 
     const { loggedUser } = useAuth();
 
@@ -31,6 +32,17 @@ function ServiceInfo(props) {
     const [serviceReviews, setServiceReviews] = useState([]);
 
     const [openPurchaseDialog, openPurchaseDialogToggle] = useToggle(false);
+
+    const serviceId = match.params.serviceId;
+    let averageScore = 0;
+    //settings for slider
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    }
 
     useEffect(() => {
         if (!reviews) {
@@ -66,15 +78,6 @@ function ServiceInfo(props) {
         }
     }, [serviceData, reviews])
 
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1
-    };
-
-    let averageScore = 0;
     if (serviceData && serviceData.numReviews !== 0) {
         averageScore = serviceData.totalScore / serviceData.numReviews;
     }
@@ -132,21 +135,15 @@ function ServiceInfo(props) {
                         </div>
                         <div className={classes.reviewsContainer}>
                             {loggedUser && loggedUser.userId !== serviceData.sellerId &&
-                                <ReviewForm
-                                    addNewReview={addNewReview}
-                                    editService={editService}
-                                    serviceData={serviceData}
-                                    serviceId={serviceData.serviceId} />
+                                <ReviewForm serviceData={serviceData} />
                             }
                             <TransitionGroup className={classes.reviews}>
                                 {serviceReviews && serviceReviews.map(review =>
                                     <CSSTransition key={review.reviewId} timeout={300} classNames="fade">
                                         <Review
-                                            key={review.reviewId}
                                             review={review}
                                             serviceData={serviceData}
-                                            editService={editService}
-                                            removeReview={removeReview} />
+                                             />
                                     </CSSTransition>
                                 )}
                             </TransitionGroup>
@@ -164,10 +161,8 @@ function ServiceInfo(props) {
                 </div>
             }
             <NewPurchaseForm
-                purchasesLength={purchasesLength}
                 serviceData={serviceData}
                 sellerData={sellerData}
-                addNewPurchase={addNewPurchase}
                 openDialog={openPurchaseDialog}
                 openDialogToggle={openPurchaseDialogToggle} />
         </Layout>

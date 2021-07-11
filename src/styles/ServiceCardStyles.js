@@ -69,7 +69,7 @@ export default {
         justifyContent: "flex-end",
         zIndex: 10,
         "& button": {
-            color: "black",
+            color: "#F1F1F1",
             transform: "scale(1.25)"
         }
     },

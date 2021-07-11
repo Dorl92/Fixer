@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Slider from "react-slick";
 import Navbar from './Navbar';
-import styles from './styles/HomeStyles';
-import { withStyles } from '@material-ui/styles';
-
 import AutocompleteSearch from './AutocompleteSearch';
+import styles from './styles/HomeStyles';
+
+import Slider from "react-slick";
+import { withStyles } from '@material-ui/styles';
 
 import logoDesign from './images/logo_design.jpg';
 import tranlation from './images/translation.jpg';

@@ -1,54 +1,38 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { useAuth } from './contexts/authContext';
 import { database } from "./firebase";
-
 import { withRouter } from 'react-router-dom';
+//contexts
+import { useAuth } from './contexts/authContext';
+import { useUsersContext } from './contexts/usersContext';
+import { useServicesContext } from './contexts/servicesContext';
+import { usePurchasesContext } from './contexts/purchasesContext';
+//hooks
 import useToggle from './hooks/useToggle';
-
+//style
 import styles from './styles/ServiceCardStyles';
+//material-ui
 import { withStyles } from '@material-ui/styles';
-import Avatar from '@material-ui/core/Avatar';
-import Snackbar from '@material-ui/core/Snackbar';
+import { Avatar, Snackbar, Divider, IconButton, Dialog, DialogTitle, Menu, MenuItem, List, ListItemText, ListItemAvatar, ListItem } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
-import Divider from '@material-ui/core/Divider';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import IconButton from '@material-ui/core/IconButton';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import GradeIcon from '@material-ui/icons/Grade';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+import { Favorite, MoreVert, Grade, Close, Check, NavigateBefore, NavigateNext } from '@material-ui/icons';
 import { red, blue } from '@material-ui/core/colors';
-import CloseIcon from '@material-ui/icons/Close';
-import CheckIcon from '@material-ui/icons/Check';
-import List from '@material-ui/core/List';
-import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
-
-function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 
 function Card(props) {
     const {
         classes,
         history,
         serviceData,
-        editUser,
-        purchases,
-        removePurchase,
         addToFavoritesSnackbar,
-        removeService,
         fullServiceInfo
     } = props;
 
     const { loggedUser } = useAuth();
+    const { editUser } = useUsersContext();
+    const { removeService } = useServicesContext();
+    const { purchases, removePurchase } = usePurchasesContext([]);
+
     const [sellerData, setSellerData] = useState(null);
-    let [currentImage, setCurrentImage] = useState(0);
+    const [currentImage, setCurrentImage] = useState(0);
     const [openSnackbar, setOpenSnackbar] = useState(false);
 
     useEffect(() => {
@@ -85,7 +69,7 @@ function Card(props) {
             return;
         }
         setOpenSnackbar(false);
-    };
+    }
 
     const handleRemoveService = evt => {
         evt.stopPropagation();
@@ -133,6 +117,10 @@ function Card(props) {
         }
     }
 
+    const Alert = (props) => {
+        return <MuiAlert elevation={6} variant="filled" {...props} />;
+    }
+
     return (
         <Fragment>
             {serviceData && sellerData &&
@@ -141,7 +129,7 @@ function Card(props) {
                         {loggedUser && loggedUser.userId === serviceData.sellerId &&
                             <div className={classes.options}>
                                 <IconButton>
-                                    <MoreVertIcon onClick={handleClick} />
+                                    <MoreVert onClick={handleClick} />
                                 </IconButton>
                                 <Menu
                                     id="simple-menu"
@@ -172,8 +160,8 @@ function Card(props) {
                             )
                         })}
                         <div className={classes.slideButtons}>
-                            <div onClick={previousImage}><NavigateBeforeIcon /></div>
-                            <div onClick={nextImage}><NavigateNextIcon /></div>
+                            <div onClick={previousImage}><NavigateBefore /></div>
+                            <div onClick={nextImage}><NavigateNext /></div>
                         </div>
                     </div>
                     <div className={classes.sellerBar}>
@@ -192,7 +180,7 @@ function Card(props) {
                     </div>
                     <div className={classes.score}>
                         <div style={{ color: "rgb(202, 178, 44)", display: "flex", alignItems: "center" }}>
-                            <GradeIcon />{averageScore.toFixed(1)}
+                            <Grade />{averageScore.toFixed(1)}
                         </div>
                         <div style={{ marginLeft: "0.2rem", color: "rgb(168, 167, 167)" }}>
                             ({serviceData.numReviews})
@@ -203,7 +191,7 @@ function Card(props) {
                     <footer className={classes.footer} onClick={() => fullServiceInfo(serviceData.serviceId)}>
                         {loggedUser ?
                             <IconButton onClick={handleFavorite}>
-                                <FavoriteIcon style={{ color: loggedUser.favorites && loggedUser.favorites.includes(serviceData.serviceId) ? "red" : null }} />
+                                <Favorite style={{ color: loggedUser.favorites && loggedUser.favorites.includes(serviceData.serviceId) ? "red" : null }} />
                             </IconButton>
                             : <div></div>}
                         <span className={classes.price}>STARTING AT <strong>${`${serviceData.price}`}</strong></span>
@@ -214,7 +202,7 @@ function Card(props) {
                             <ListItem button onClick={handleRemoveService}>
                                 <ListItemAvatar>
                                     <Avatar style={{ backgroundColor: blue[100], color: blue[500] }}>
-                                        <CheckIcon />
+                                        <Check />
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText primary="Delete" />
@@ -222,7 +210,7 @@ function Card(props) {
                             <ListItem button onClick={openDialogToggle}>
                                 <ListItemAvatar>
                                     <Avatar style={{ backgroundColor: red[100], color: red[500] }}>
-                                        <CloseIcon />
+                                        <Close />
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText primary="Cancel" />

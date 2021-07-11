@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
-import { useAuth } from './contexts/authContext';
-import useInputState from './hooks/useInputState';
 import { v4 as uuidv4 } from 'uuid';
-import { withStyles } from '@material-ui/styles';
+//contexts
+import { useAuth } from './contexts/authContext';
+import { usePurchasesContext } from './contexts/purchasesContext';
+//hooks
+import useInputState from './hooks/useInputState';
+//style
 import styles from './styles/NewPurchaseFormStyles';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
-import Dialog from '@material-ui/core/Dialog';
-import Button from '@material-ui/core/Button';
-import { Divider } from '@material-ui/core';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+//material-ui
+import { withStyles } from '@material-ui/styles';
+import { Divider,Button,Dialog,Radio,RadioGroup,FormControlLabel,FormLabel } from '@material-ui/core';
+import { ValidatorForm } from 'react-material-ui-form-validator';
 
 function NewPurchaseForm(props) {
-    const { classes, serviceData, sellerData, addNewPurchase, openDialog, openDialogToggle, purchasesLength } = props;
+    const { classes, serviceData, sellerData, openDialog, openDialogToggle, } = props;
 
     const { loggedUser } = useAuth();
+    const { purchases, addNewPurchase } = usePurchasesContext([]);
 
     const [noteToSeller, changeNoteToSeller, resetNoteToSeller] = useInputState('');
     const [pricePlan, setPricePlan] = useState('basic');
@@ -73,7 +73,7 @@ function NewPurchaseForm(props) {
         const deliveryDate = formatDate(addDays(purchaseDate, plan.daysToDelivery))
         const newPurchase = {
             purchaseId: uuidv4(),
-            index: purchasesLength + 1,
+            index: purchases.length + 1,
             serviceId: serviceData.serviceId,
             sellerId: sellerData.userId,
             userId: loggedUser.userId,
@@ -84,7 +84,8 @@ function NewPurchaseForm(props) {
             purchaseDate: formatDate(purchaseDate),
             deliveryDate: deliveryDate
         }
-        addNewPurchase(newPurchase)
+        addNewPurchase(newPurchase);
+        resetNoteToSeller();
         openDialogToggle();
     }
 

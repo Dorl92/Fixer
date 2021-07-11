@@ -1,38 +1,32 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { useAuth } from './contexts/authContext';
 import { database } from "./firebase";
-
 import axios from 'axios';
-
-import Loader from 'react-loader-spinner';
+//style
+import styles from './styles/UserInfoStyles';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-
+//components
+import Layout from './Layout';
+import Loader from 'react-loader-spinner';
 import SellerDashboard from './SellerDashboard';
 import UserDashboard from './UserDashboard';
-
-import { arrayMove } from 'react-sortable-hoc';
-
-import { withStyles } from '@material-ui/styles';
-import styles from './styles/UserInfoStyles';
-import Avatar from '@material-ui/core/Avatar';
-import Layout from './Layout';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import PersonIcon from '@material-ui/icons/Person';
+//context
+import { useAuth } from './contexts/authContext';
+import { useServicesContext } from './contexts/servicesContext';
+import { useUsersContext } from './contexts/usersContext';
+import { usePurchasesContext } from './contexts/purchasesContext';
+//hooks
 import useInputState from './hooks/useInputState';
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
-import EditIcon from '@material-ui/icons/Edit';
-import TextField from '@material-ui/core/TextField';
-import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
-import { Divider } from '@material-ui/core';
+//material-ui
+import { withStyles } from '@material-ui/styles';
+import { LocationOn, Person, AddAPhoto, Edit } from '@material-ui/icons';
+import { Divider, Avatar, MenuItem, FormControl, TextField } from '@material-ui/core';
 
 function UserInfo(props) {
-
-    const { classes, match, users, services, editUser, editPurchase } = props;
-
-    const userId = match.params.userId;
+    const { classes, match } = props;
 
     const { loggedUser, updatePhotoURL, updateUserName } = useAuth();
+    const { editUser } = useUsersContext();
+    const { editPurchase } = usePurchasesContext([]);
 
     const [userData, setUserData] = useState(null);
     const [sellerSales, setSellerSales] = useState([])
@@ -40,13 +34,17 @@ function UserInfo(props) {
 
     const [username, changeUsername, resetUsername, setUsername] = useInputState('');
     const [description, changeDescription, resetDescription, setDescription] = useInputState('');
-    const [skill, changeSkill, resetSkill] = useInputState('');
+    const [skill, changeSkill] = useInputState('');
     const [photoUrl, setPhotoUrl] = useState('');
 
     const [showUsernameEdit, setShowUsernameEdit] = useState(false);
     const [showDescriptionEdit, setShowDescriptionEdit] = useState(false);
     const [showSkillEdit, setShowSkillEdit] = useState(false);
 
+    const userId = match.params.userId;
+    let currentSkills = null;
+    let newSkillsList = null;
+    const skillsList = ['Digital Marketing', 'Graphics & Design', 'Writing & Translation', 'Programming & Tech', 'Music & Audio', 'Video & Animation', 'Other'];
 
     useEffect(() => {
         database.ref('users/' + userId)
@@ -70,10 +68,6 @@ function UserInfo(props) {
             })
     }, [])
 
-
-    let currentSkills = null;
-    let newSkillsList = null;
-
     useEffect(() => {
         if (userData) {
             setPhotoUrl(userData.photoUrl)
@@ -82,7 +76,6 @@ function UserInfo(props) {
         }
     }, [userData])
 
-    const skillsList = ['Digital Marketing', 'Graphics & Design', 'Writing & Translation', 'Programming & Tech', 'Music & Audio', 'Video & Animation', 'Other'];
 
     if (userData && userData.isSeller) {
         currentSkills = new Set([...userData.skills]);
@@ -175,7 +168,7 @@ function UserInfo(props) {
                                             className={classes.inputImage}
                                             onChange={handleUploadImage} />
                                         <label className={classes.inputImageLabel} htmlFor="file">
-                                            <AddAPhotoIcon />
+                                            <AddAPhoto />
                                         </label>
                                     </Fragment>
                                 }
@@ -192,7 +185,7 @@ function UserInfo(props) {
                                     </div>
                                     <div className={classes.edit}>
                                         {loggedUser && loggedUser.userId === userId &&
-                                            <EditIcon onClick={openUsernameForm} />
+                                            <Edit onClick={openUsernameForm} />
                                         }
                                     </div>
                                 </div>
@@ -203,14 +196,14 @@ function UserInfo(props) {
                             <div className={classes.footerCardPersnalInfo}>
                                 <div className={classes.fromInfo}>
                                     <div style={{ display: "flex", alignItems: "center" }}>
-                                        <LocationOnIcon />
+                                        <LocationOn />
                                         <span>From</span>
                                     </div>
                                     <strong >{userData.country}</strong>
                                 </div>
                                 <div className={classes.sinceInfo}>
                                     <div style={{ display: "flex", alignItems: "center" }}>
-                                        <PersonIcon />
+                                        <Person />
                                         <span>Member Since</span>
                                     </div>
                                     <strong>{userData.memberSince}</strong>
@@ -291,17 +284,14 @@ function UserInfo(props) {
                                 <UserDashboard
                                     onSortEnd={onSortEnd}
                                     userPurchases={userPurchases}
-                                    services={services}
-                                    users={users}
-                                    editPurchase={editPurchase}
                                 /> : null
                             }
                             {loggedUser.isSeller && sellerSales.length ?
                                 <SellerDashboard
                                     sellerSales={sellerSales}
-                                    users={users}
-                                    services={services}
-                                    editPurchase={editPurchase}
+                                    // users={users}
+                                    // services={services}
+                                    // editPurchase={editPurchase}
                                 /> : null
                             }
                         </div>

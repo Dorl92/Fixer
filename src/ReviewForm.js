@@ -1,24 +1,30 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+//contexts
 import { useAuth } from './contexts/authContext';
-
+import { useServicesContext } from './contexts/servicesContext';
+import { useReviewsContext } from './contexts/reviewsContext';
+//hooks
 import useInputState from './hooks/useInputState';
 import useRatingState from './hooks/useRatingState';
-import { v4 as uuidv4 } from 'uuid';
+//style
 import styles from './styles/ReviewFormStyles';
 import './styles/stylesheets/stars.css';
-
+//material-ui
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/styles';
 
 function ReviewForm(props) {
-    const { classes, addNewReview, serviceData, serviceId, editService } = props;
+    const { classes, serviceData } = props;
+
     const { loggedUser } = useAuth();
+    const { editService } = useServicesContext();
+    const { addNewReview } = useReviewsContext();
 
     const [rating, changeRating, resetRating] = useRatingState("0");
     const [text, changeText, resetText] = useInputState("");
 
     const [isText, setIsText] = useState(false);
-
 
     const submitNewReview = evt => {
         evt.preventDefault();
@@ -33,7 +39,7 @@ function ReviewForm(props) {
             username: loggedUser.username,
             rating: parseInt(rating),
             text: text,
-            serviceId: serviceId
+            serviceId: serviceData.serviceId
         }
         const updatedService = {
             ...serviceData,
@@ -41,10 +47,11 @@ function ReviewForm(props) {
             numReviews: serviceData.numReviews + 1
         }
         addNewReview(newReview);
-        editService(updatedService, serviceId)
+        editService(updatedService, serviceData.serviceId)
         resetRating();
         resetText();
     }
+    
     return (
         <div className={classes.reviewForm}>
             <span>Leave a Review</span>

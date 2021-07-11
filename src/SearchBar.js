@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
-
+//utils
+import { searchData } from './utils/searchData';
 import { withRouter } from 'react-router-dom';
+//contexts
+import { useServicesContext } from './contexts/servicesContext';
+//style
+import styles from './styles/SearchBarStyles';
+//material-ui
 import SearchIcon from '@material-ui/icons/Search';
 import { withStyles } from '@material-ui/styles';
-import styles from './styles/SearchBarStyles';
 
 function AutocompleteSearch(props) {
-    const { classes, history, searchData } = props;
+    const { classes, history } = props;
+    
+    const { services } = useServicesContext();
+
     const [state, setState] = useState({
         activeSuggestion: 0,
         filteredSuggestions: [],
@@ -18,7 +26,7 @@ function AutocompleteSearch(props) {
 
     const onSearchChange = evt => {
         const userInput = evt.currentTarget.value;
-        const filteredSuggestions = searchData.filter(
+        const filteredSuggestions = searchData(services).filter(
             category => category.toLowerCase().indexOf(userInput.toLowerCase()) > -1
         );
         setState({

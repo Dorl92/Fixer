@@ -29,6 +29,7 @@ export default {
             width: props => (props.navbar ? "220px" : "350px"),
             paddingLeft: "5px",
             fontSize: props => (props.navbar ? "14px" : "18px"),
+            fontFamily: "Nunito"
         },
         [sizes.down("sm")]: {
             "& input":{

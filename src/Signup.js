@@ -1,56 +1,38 @@
-import React, { useState } from 'react';
-import { useAuth } from './contexts/authContext';
+import React, { useState, Fragment } from 'react';
 import axios from 'axios';
-import useInputState from './hooks/useInputState';
-import Avatar from '@material-ui/core/Avatar';
-import Loader from 'react-loader-spinner';
+import { Link } from 'react-router-dom';
+//contexts
+import { useAuth } from './contexts/authContext';
+import { useUsersContext } from './contexts/usersContext';
+//components
 import Layout from './Layout';
-import Button from '@material-ui/core/Button';
+import Loader from 'react-loader-spinner';
+//style
+import styles from './styles/SignupStyles';
+//hooks
+import useInputState from './hooks/useInputState';
+//material-ui
 import Alert from '@material-ui/lab/Alert';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { Divider } from '@material-ui/core';
+import { Divider, Avatar, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
-import styles from './styles/SignupStyles';
-import { Link } from 'react-router-dom';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import { Fragment } from 'react';
 
 function Signup(props) {
-    const { classes, history, addNewUser } = props;
+    const { classes, history } = props;
+
+    const { signup } = useAuth();
+    const { addNewUser } = useUsersContext();
 
     const [email, changeEmail, resetEmail] = useInputState('');
     const [password, changePassword, resetPassword] = useInputState('');
     const [username, changeUsername, resetUsername] = useInputState('');
-    const [photoUrl, setPhotoUrl] = useState('');
     const [country, changeCountry, resetCountry] = useInputState('');
+    const [photoUrl, setPhotoUrl] = useState('');
 
-    const { signup } = useAuth();
     const [error, setError] = useState('');
     const [loadingSubmit, setLoadingSubmit] = useState(false);
     const [loadingUploadImage, setLoadingUploadImage] = useState(false);
-
-
-    const handleUploadImage = evt => {
-        const files = evt.target.files[0];
-        const formData = new FormData();
-        formData.append("upload_preset", "fixer_app");
-        formData.append("file", files);
-        setLoadingUploadImage(true)
-        axios.post(process.env.REACT_APP_CLOUDINARY_URL, formData)
-            .then(res => {
-                setPhotoUrl(res.data.secure_url)
-                setLoadingUploadImage(false)
-            })
-            .catch(err => console.log(err));
-    }
-
-    const handleDeleteImage = evt => {
-        setPhotoUrl('')
-    }
-
-    const formatDate = (date) => {
-        return (date.getMonth() + 1) + '/' + date.getFullYear();
-    }
 
     const handleSignup = async (evt) => {
         evt.preventDefault();
@@ -81,6 +63,29 @@ function Signup(props) {
         }
         setLoadingSubmit(false)
     }
+
+    const handleUploadImage = evt => {
+        const files = evt.target.files[0];
+        const formData = new FormData();
+        formData.append("upload_preset", "fixer_app");
+        formData.append("file", files);
+        setLoadingUploadImage(true)
+        axios.post(process.env.REACT_APP_CLOUDINARY_URL, formData)
+            .then(res => {
+                setPhotoUrl(res.data.secure_url)
+                setLoadingUploadImage(false)
+            })
+            .catch(err => console.log(err));
+    }
+
+    const handleDeleteImage = evt => {
+        setPhotoUrl('')
+    }
+
+    const formatDate = (date) => {
+        return (date.getMonth() + 1) + '/' + date.getFullYear();
+    }
+
     return (
         <Layout>
             <section className={classes.root}>

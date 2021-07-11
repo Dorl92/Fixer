@@ -1,19 +1,28 @@
 import React, { Fragment } from 'react';
-import { withStyles } from '@material-ui/styles';
-import styles from './styles/SoldServiceStyles';
+//contexts
+import { useServicesContext } from './contexts/servicesContext';
+import { useUsersContext } from './contexts/usersContext';
+import { usePurchasesContext } from './contexts/purchasesContext';
+//components
 import ProgressBar from "@ramonak/react-progress-bar";
+//style
+import styles from './styles/SoldServiceStyles';
+//material-ui
+import { withStyles } from '@material-ui/styles';
 import Avatar from '@material-ui/core/Avatar';
-import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import DoneIcon from '@material-ui/icons/Done';
+import { NavigateBefore, NavigateNext, Done } from '@material-ui/icons';
+
 
 function SoldService(props) {
-    const { classes, services, users, sale, progressStage, category, editPurchase } = props;
+    const { classes, sale } = props;
+
+    const { services } = useServicesContext();
+    const { users } = useUsersContext();
+    const { editPurchase } = usePurchasesContext();
 
     let barColor = null;
-    let categoryColor = null;
     let progress = 10;
-    switch (progressStage) {
+    switch (sale.progressStage) {
         case 0:
             barColor = "#7AD30D";
             break;
@@ -31,7 +40,8 @@ function SoldService(props) {
             break;
     }
 
-    switch (category) {
+    let categoryColor = null;
+    switch (sale.serviceCategory) {
         case 'Graphics & Design':
             categoryColor = "#A22E2E";
             break;
@@ -48,12 +58,22 @@ function SoldService(props) {
             categoryColor = "#13A429";
             break;
         case 'Programming & Tech':
-            categoryColor = "#BD7A23"; 
+            categoryColor = "#BD7A23";
             break;
     }
 
+    const daysLeft = (end) => {
+        const currentDate = new Date();
+        const deliveryDate = new Date(end)
+        const oneDay = 1000 * 60 * 60 * 24;
+        const timeLeft = deliveryDate.getTime() - currentDate.getTime();
+        const daysLeft = Math.round(timeLeft / oneDay);
+        return daysLeft;
+    }
+
     let numDaysColor = null;
-    const numDays = sale && parseInt(sale.pricePlan.daysToDelivery)
+    const numDays = daysLeft(sale.deliveryDate)
+    console.log(numDays)
     switch (true) {
         case (numDays >= 0 && numDays < 3):
             numDaysColor = "#C42513";
@@ -81,16 +101,6 @@ function SoldService(props) {
             break;
     }
 
-
-    const daysLeft = (end) => {
-        const currentDate = new Date();
-        const deliveryDate = new Date(end)
-        const oneDay = 1000 * 60 * 60 * 24;
-        const timeLeft = deliveryDate.getTime() - currentDate.getTime();
-        const daysLeft = Math.round(timeLeft / oneDay);
-        return daysLeft;
-    }
-
     let serviceData = null;
     if (services && sale) {
         serviceData = services.find(service => service.serviceId === sale.serviceId);
@@ -116,11 +126,11 @@ function SoldService(props) {
                 <div className={classes.container}>
                     <div className={classes.buttonsHover}>
                         {sale.progressStage !== 0 ?
-                            <Avatar onClick={previousProgressStage}><NavigateBeforeIcon style={{ transform: "scale(1.7)" }} /></Avatar>
+                            <Avatar onClick={previousProgressStage}><NavigateBefore style={{ transform: "scale(1.7)" }} /></Avatar>
                             : <div></div>
                         }
                         {sale.progressStage !== 3 ?
-                            <Avatar onClick={nextProgressStage}><NavigateNextIcon style={{ transform: "scale(1.7)" }} /></Avatar>
+                            <Avatar onClick={nextProgressStage}><NavigateNext style={{ transform: "scale(1.7)" }} /></Avatar>
                             : <div></div>
                         }
                     </div>
@@ -135,7 +145,7 @@ function SoldService(props) {
                             <div className={classes.delivery}>
                                 {sale.progressStage === 3 ?
                                     <div style={{ border: "1px solid #349B25", color: "#349B25" }} className={classes.daysLeft}>
-                                        <DoneIcon />
+                                        <Done />
                                     </div>
                                     :
                                     <div style={{ color: `${numDaysColor}`, border: `1px solid ${numDaysColor}` }} className={classes.daysLeft}>
@@ -151,7 +161,7 @@ function SoldService(props) {
                             </div>
                         </div>
                         <div className={classes.username}>
-                            Purchased by: {userData.username}
+                            Purchased by <strong>{userData.username}</strong>
                         </div>
                         <div className={classes.completionBar}>
                             <ProgressBar

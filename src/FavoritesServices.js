@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
+//style
+import styles from './styles/ServicesListStyles';
+//components
 import Layout from './Layout';
+import Loader from 'react-loader-spinner';
+import ServiceCard from './ServiceCard';
+//contexts
 import { useAuth } from './contexts/authContext';
-
+import { useServicesContext } from './contexts/servicesContext';
+//material-ui
 import { withStyles } from '@material-ui/styles';
 import { Divider } from '@material-ui/core';
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 
-import ServiceCard from './ServiceCard';
-import styles from './styles/ServicesListStyles';
 
 function FavoritesServices(props) {
-    const { classes, history, services, removeService, editUser } = props;
+    const { classes, history, editUser } = props;
+
     const { loggedUser } = useAuth();
+    const { services, removeService } = useServicesContext();
 
     const fullServiceInfo = serviceId => {
         history.push(`/services/${serviceId}/info`);

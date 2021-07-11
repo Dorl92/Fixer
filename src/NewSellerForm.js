@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
+//contexts
 import { useAuth } from './contexts/authContext';
+import { useUsersContext } from './contexts/usersContext';
+//hooks
 import useInputState from './hooks/useInputState';
-
-import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
+//components
 import Layout from './Layout';
-import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/styles';
+//style
 import styles from './styles/NewSellerFormStyles';
+//material-ui
+import { withStyles } from '@material-ui/styles';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import { Divider } from '@material-ui/core';
+import { Divider, FormControl, MenuItem, Button } from '@material-ui/core';
 
 function NewSellerForm(props) {
-    const { classes, history, addNewSeller } = props;
+    const { classes, history } = props;
+
     const { loggedUser } = useAuth();
+    const { addNewSeller } = useUsersContext();
 
     const [firstname, changeFirstname, resetFirstname] = useInputState('');
     const [lastname, changeLastname, resetLastname] = useInputState('');
@@ -26,7 +30,7 @@ function NewSellerForm(props) {
     const handleSubmit = evt => {
         evt.preventDefault();
         const newSeller = {
-            isSeller: true, 
+            isSeller: true,
             firstname: firstname,
             lastname: lastname,
             description: description,
@@ -78,7 +82,7 @@ function NewSellerForm(props) {
                         label="Birthday"
                         validators={['required']}
                         errorMessages={['Enter your birthday']}
-                        style={{ margin: "1rem 0"}}
+                        style={{ margin: "1rem 0" }}
                         InputLabelProps={{
                             shrink: true,
                         }} />
@@ -87,7 +91,7 @@ function NewSellerForm(props) {
                             select
                             id="selectSkill"
                             label="Select your main Skill"
-                            style={{ margin: "1rem 0"}}
+                            style={{ margin: "1rem 0" }}
                             value={skills}
                             validators={['required']}
                             errorMessages={['Skill is required']}

@@ -1,48 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import { useAuth } from './contexts/authContext';
-import useInputState from './hooks/useInputState';
+import React, { useState, useEffect, Fragment } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
+import { SERVICE_CATEGORIS_LIST, SERVICE_SUBCATEGORIS_LIST } from './utils/constants';
+//components
 import Loader from 'react-loader-spinner';
-import { withStyles } from '@material-ui/styles';
+import Layout from './Layout';
+//style
 import styles from './styles/NewServiceFormStyles';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Button from '@material-ui/core/Button';
+//contexts
+import { useAuth } from './contexts/authContext';
+import { useServicesContext } from './contexts/servicesContext';
+//hooks
+import useInputState from './hooks/useInputState';
+//material-ui
+import { withStyles } from '@material-ui/styles';
+import { MenuItem, Button, FormControl, Divider } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { Divider } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
-import { v4 as uuidv4 } from 'uuid';
-
-import Layout from './Layout';
-import { Fragment } from 'react';
-
 function NewServiceForm(props) {
-    const { classes, history, addNewService } = props;
-
+    const { classes, history } = props;
+    
     const { loggedUser } = useAuth();
+    const { addNewService } = useServicesContext(); 
 
-    const [category, changeCategory, resetCategory, setCategory] = useInputState("");
-    const [subcategory, changeSubcategory, resetSubcategory, setSubcategory] = useInputState("");
+    const [category, changeCategory, resetCategory] = useInputState("");
+    const [subcategory, changeSubcategory, resetSubcategory] = useInputState("");
     const [title, changeTitle, resetTitle] = useInputState("");
-    const [description, changeDescription, resetdescription] = useInputState("");
+    const [description, changeDescription, resetDescription] = useInputState("");
     const [price, changePrice, resetPrice] = useInputState("");
     const [images, setImages] = useState([]);
-
+    
     const [isImages, setIsImages] = useState(false);
     const [isDescription, setIsDescription] = useState(false);
-
     const [loadingUploadImage, setLoadingUploadImage] = useState(false);
-
-    const serviceCategoriesList = ["Graphics & Design", "Digital Marketing", "Writing & Translation", "Video & Animation", "Music & Audio", "Programming & Tech"];
-    const serviceSubCategoriesList = {
-        "Graphics & Design": ["Logo Design", "Business Cards", "Game Art", "Website Design", "Book Design", "Photoshop Editing", "Cartoons & Comics", "Other"],
-        "Digital Marketing": ["Social Media", "Content Marketing", "Video Marketing", "Web Analytics", "Music Promotion", "Other"],
-        "Writing & Translation": ["Articles", "Translation", "Book Editing", "Resume Writing", "Creative Writing", "Other"],
-        "Video & Animation": ["Video Editing", "Character Animation", "Visual Effects", "Book Traliers", "Drone Videography", "Other"],
-        "Music & Audio": ["Voice Over", "Session Musicians", "Songwriters", "Sound Design", "DJ Mixing", "Other"],
-        "Programming & Tech": ["Web Programming", "Game Deveopment", "Desktop Applications", "Mobile Apps", "User Testing", "Other"]
-    };
 
     useEffect(() => {
         ValidatorForm.addValidationRule('isPricePositive', (value) =>
@@ -102,7 +93,7 @@ function NewServiceForm(props) {
         resetCategory();
         resetSubcategory();
         resetTitle();
-        resetdescription();
+        resetDescription();
         resetPrice();
         history.push('/services');
     };
@@ -134,7 +125,7 @@ function NewServiceForm(props) {
                             onChange={changeCategory}
                             validators={['required']}
                             errorMessages={['Select service type']} >
-                            {serviceCategoriesList.map(typeItem => <MenuItem value={typeItem}>{typeItem}</MenuItem>)}
+                            {SERVICE_CATEGORIS_LIST.map(typeItem => <MenuItem value={typeItem}>{typeItem}</MenuItem>)}
                         </TextValidator>
                     </FormControl>
                     {category &&
@@ -149,7 +140,7 @@ function NewServiceForm(props) {
                                 onChange={changeSubcategory}
                                 validators={['required']}
                                 errorMessages={['This field is required']} >
-                                {serviceSubCategoriesList[category].map(subcategory => <MenuItem value={subcategory}>{subcategory}</MenuItem>)}
+                                {SERVICE_SUBCATEGORIS_LIST[category].map(subcategory => <MenuItem value={subcategory}>{subcategory}</MenuItem>)}
                             </TextValidator>
                         </FormControl>
                     }

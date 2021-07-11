@@ -1,13 +1,21 @@
 import React from 'react';
+//contexts
 import { useAuth } from './contexts/authContext';
-import './styles/stylesheets/stars.css';
-import ClearIcon from '@material-ui/icons/Clear';
-import { withStyles } from '@material-ui/styles';
+import { useServicesContext } from './contexts/servicesContext';
+import { useReviewsContext } from './contexts/reviewsContext';
+//style
 import styles from './styles/ReviewStyles';
+import './styles/stylesheets/stars.css';
+//material-ui
+import { Clear } from '@material-ui/icons';
+import { withStyles } from '@material-ui/styles';
 
 function Review(props) {
-    const { classes, review, removeReview, serviceData, editService } = props;
+    const { classes, review, serviceData } = props;
+
     const { loggedUser } = useAuth();
+    const { editService } = useServicesContext();
+    const { removeReview } = useReviewsContext();
 
     const handleRemoveReview = () => {
         const updatedService = {
@@ -29,7 +37,7 @@ function Review(props) {
                 <div className={classes.name}>Writen By <strong>{`${review.username}`}</strong></div>
             </div>
             {loggedUser && loggedUser.username === review.username &&
-                <ClearIcon
+                <Clear
                     className={classes.deleteReview}
                     onClick={handleRemoveReview} />
             }
