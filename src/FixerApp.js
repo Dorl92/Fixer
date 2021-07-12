@@ -62,7 +62,7 @@ function FixerApp() {
 
     const findService = (id) => {
         return services.find(service => service.serviceId === id);
-    };
+    }
 
     const THEME = createMuiTheme({
         typography: {
