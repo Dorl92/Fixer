@@ -77,7 +77,7 @@ function Home(props) {
                     <img src={img1} style={{ width: "100%", height: "100%" }} />
                 </div>
                 <div className={classes.text}>
-                    <h2>DESIGN WITH FIXER</h2>
+                    <h2>DESIGN WITH SERVICE<span style={{fontFamily: "Oleo Script"}}>IM</span></h2>
                     <img src={design} style={{ width: "50px", height: "50px" }} />
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, iste molestiae beatae,
@@ -90,7 +90,7 @@ function Home(props) {
             </div>
             <div className={classes.secondContainer}>
                 <div className={classes.text}>
-                    <h2>ABOUT FIXER</h2>
+                    <h2>ABOUT SERVICE<span style={{fontFamily: "Oleo Script"}}>IM</span></h2>
                     <img src={about} style={{ width: "50px", height: "50px" }} />
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, iste molestiae beatae,

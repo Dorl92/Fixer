@@ -6,7 +6,7 @@ import { UsersProvider } from './contexts/usersContext';
 import { PurchasesProvider } from './contexts/purchasesContext';
 import { ReviewsProvider } from './contexts/reviewsContext';
 //components
-import FixerApp from './FixerApp';
+import ServiceimApp from './ServiceimApp';
 
 function App() {
 
@@ -17,7 +17,7 @@ function App() {
           <ServicesProvider>
             <PurchasesProvider>
               <ReviewsProvider>
-                <FixerApp />
+                <ServiceimApp />
               </ReviewsProvider>
             </PurchasesProvider>
           </ServicesProvider>

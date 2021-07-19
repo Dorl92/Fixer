@@ -25,7 +25,7 @@ import UserInfo from './UserInfo';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
-function FixerApp() {
+function ServiceimApp() {
 
     const { loggedUser } = useAuth();
     const { services, setServices } = useServicesContext();
@@ -144,5 +144,5 @@ function FixerApp() {
     );
 }
 
-export default FixerApp;
+export default ServiceimApp;
 

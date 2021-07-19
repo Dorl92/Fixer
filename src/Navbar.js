@@ -62,7 +62,7 @@ function Navbar(props) {
       <div className={navbarBackground || history.location.pathname !== '/' ? classes.navbarScroll : classes.navbar}>
         <div className={navbarBackground || history.location.pathname !== '/' ? classes.logoScroll : classes.logo}>
           <MenuIcon onClick={() => setOpenDrawer(true)} className={classes.menuIcon} />
-          <Link exact to="/">FIXER</Link>
+          <Link exact to="/">service<span>im</span></Link>
         </div>
         <div className={classes.navbarLinks}>
           <NavLink exact activeClassName={navbarBackground || history.location.pathname !== '/' ? classes.activeLinkScroll : classes.activeLink} to="/">Home</NavLink>
@@ -90,7 +90,7 @@ function Navbar(props) {
       <Drawer open={openDrawer} onClose={handleCloseDrawer}>
         <div className={classes.drawerNavbar}>
           <div className={classes.drawerLogo}>
-            <Link exact to="/">FIXER</Link>
+            <Link exact to="/">service<span>im</span></Link>
           </div>
           <NavLink exact activeClassName={classes.activeLink} to="/">Home</NavLink>
           <NavLink exact activeClassName={classes.activeLink} to="/services">Services</NavLink>

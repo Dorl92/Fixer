@@ -58,9 +58,13 @@ export default {
         alignItems: "center",
         "& a": {
             fontSize: "28px",
-            fontWeight: "900",
-            color: "white !important" 
+            fontWeight: "800",
+            color: "white !important"
         },
+        "& span": {
+            fontFamily: 'Oleo Script',
+            fontSize: "30px",
+        }
     },
     logoScroll: {
         marginRight: "15px",
@@ -70,8 +74,13 @@ export default {
         alignItems: "center",
         "& a": {
             fontSize: "28px",
-            fontWeight: "900",
+            fontWeight: "800",
             color: "#23775a !important"
+        },
+        "& span": {
+            fontFamily: 'Oleo Script',
+            fontSize: "30px",
+            color: "#2f9974"
         },
         "&:hover": {
             color: "#23775a !important"
@@ -133,7 +142,7 @@ export default {
             cursor: "pointer"
         }
     },
-    drawerNavbar:{
+    drawerNavbar: {
         color: "black",
         fontSize: "20px",
         width: "100%",
@@ -164,16 +173,21 @@ export default {
             fontWeight: "900",
             color: "#23775a"
         },
+        "& span": {
+            fontFamily: 'Oleo Script',
+            fontSize: "30px",
+            color: "#2f9974"
+        }
     },
-    drawerAuthLinks:{
+    drawerAuthLinks: {
         display: "flex",
         flexDirection: "column",
         marginTop: "4rem"
     },
-    signoutButton:{
+    signoutButton: {
         backgroundColor: "#23775a",
         color: "white",
-        fontSize:  "18px",
+        fontSize: "18px",
         fontWeight: "300",
         outline: "none",
         border: "none",
