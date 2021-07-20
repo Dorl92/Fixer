@@ -27,6 +27,11 @@ export default {
         [sizes.down("sm")]: {
             fontSize: "26px",
         },
+        "& span": {
+            fontFamily: 'Oleo Script',
+            fontSize: "42px",
+            fontWeight: "400",
+        }
     },
     popularTabs: {
         display: "flex",

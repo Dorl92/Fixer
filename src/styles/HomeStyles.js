@@ -25,13 +25,15 @@ export default {
     },
     popularServices: {
         width: "100%",
+        [sizes.down("lg")]: {
+            display: "none"
+        }
     },
     slider: {
         margin: "0 auto 5rem auto",
         width: "90%",
         "& img": {
-            width: "270px",
-            height: "375px",
+            width: "93%",
             borderRadius: "5px",
             cursor: "pointer",
             transition: "all 0.2s ease-in-out",
@@ -46,44 +48,18 @@ export default {
             marginLeft: "1.5rem",
             marginTop: "1.5rem",
             zIndex: "10",
-            fontSize: "30px",
+            fontSize: "32px",
             color: "rgb(250, 250, 250)",
             "& small": {
-                fontSize: "16px",
+                fontSize: "18px",
                 fontWeight: "300",
-            }
-        },
-        [sizes.down("xxxl")]: {
-            "& img": {
-                width: "240px",
-                height: "330px",
             }
         },
         [sizes.down("xxl")]: {
             "& h4": {
-                fontSize: "26px",
-            },
-            "& img": {
-                width: "210px",
-                height: "287px",
+                fontSize: "28px",
             }
-        },
-        [sizes.down("xl")]: {
-            "& img": {
-                width: "195px",
-                height: "267px",
-            }
-        },
-        [sizes.down("lg")]: {
-            width: "95%",
-            "& img": {
-                width: "175px",
-                height: "240px",
-            }
-        },
-        [sizes.down("md")]: {
-            display: "none"
-        },
+        }
     },
     sliderTitle: {
         marginLeft: "6%",
@@ -96,10 +72,7 @@ export default {
         },
         [sizes.down("xl")]: {
             fontSize: "35px",
-        },
-        [sizes.down("md")]: {
-            display: "none",
-        },
+        }
     },
     firstContainer: {
         width: "90%",

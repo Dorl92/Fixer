@@ -28,7 +28,7 @@ function AutocompleteSearch(props) {
     return (
         <Fragment>
             <div className={classes.searchContainer}>
-                <div className={classes.searchTitle}>Find a Service that fit your needs</div>
+                <div className={classes.searchTitle}>Find a <span>service</span> that fit your needs</div>
                 <SearchBar searchData={searchData} />
                 <div className={classes.popularTabs}>
                     <span>Popular:</span>
