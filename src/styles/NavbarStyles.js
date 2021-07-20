@@ -34,19 +34,23 @@ export default {
         top: "0",
         width: "100%",
         backgroundColor: "#F1F1F1",
+        borderBottom: "3px solid #c9c9c9",
         display: "flex",
         alignItems: "center",
         height: "80px",
         zIndex: "25",
         "& a": {
             color: "black",
-            margin: "0 0.5rem",
+            paddingBottom: "26px",
+            padding: "0 0.5rem",
             transition: "all 0.1s ease-in-out",
             fontSize: "20px",
             fontWeight: "400",
             textDecoration: "none",
             "&:hover": {
-                color: "#5A5959"
+                // color: "#5A5959"
+                borderBottom: "3px solid #bbbbbb"
+
             },
         }
     },
@@ -118,6 +122,8 @@ export default {
     navbarLinks: {
         padding: "0.5rem 1rem",
         display: "flex",
+        height: "100%",
+        alignItems: "center",
         [sizes.down("md")]: {
             display: "none"
         }
@@ -126,7 +132,7 @@ export default {
         borderBottom: "1px solid white"
     },
     activeLinkScroll: {
-        borderBottom: "1px solid black"
+        borderBottom: "3px solid #23775a !important"
     },
     authLinks: {
         display: "flex",

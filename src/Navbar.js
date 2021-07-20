@@ -62,21 +62,21 @@ function Navbar(props) {
       <div className={navbarBackground || history.location.pathname !== '/' ? classes.navbarScroll : classes.navbar}>
         <div className={navbarBackground || history.location.pathname !== '/' ? classes.logoScroll : classes.logo}>
           <MenuIcon onClick={() => setOpenDrawer(true)} className={classes.menuIcon} />
-          <Link exact to="/">service<span>im</span></Link>
+          <div><Link exact to="/">service<span>im</span></Link></div>
         </div>
         <div className={classes.navbarLinks}>
-          <NavLink exact activeClassName={navbarBackground || history.location.pathname !== '/' ? classes.activeLinkScroll : classes.activeLink} to="/">Home</NavLink>
-          <NavLink exact activeClassName={navbarBackground || history.location.pathname !== '/' ? classes.activeLinkScroll : classes.activeLink} to="/services">Services</NavLink>
-          {loggedUser && <NavLink exact activeClassName={navbarBackground || history.location.pathname !== '/' ? classes.activeLinkScroll : classes.activeLink} to="/favorites">Favorites</NavLink>}
-          {loggedUser && loggedUser.isSeller && <NavLink exact activeClassName={navbarBackground || history.location.pathname !== '/' ? classes.activeLinkScroll : classes.activeLink} to="/services/new">Add Service</NavLink>}
-          {loggedUser && !loggedUser.isSeller && <NavLink exact activeClassName={navbarBackground || history.location.pathname !== '/' ? classes.activeLinkScroll : classes.activeLink} to="/signup/new-seller">Become a Seller</NavLink>}
+          <div><NavLink exact activeClassName={navbarBackground || history.location.pathname !== '/' ? classes.activeLinkScroll : classes.activeLink} to="/"><span>Home</span></NavLink></div>
+          <div><NavLink exact activeClassName={navbarBackground || history.location.pathname !== '/' ? classes.activeLinkScroll : classes.activeLink} to="/services"><span>Services</span></NavLink></div>
+          {loggedUser && <div><NavLink exact activeClassName={navbarBackground || history.location.pathname !== '/' ? classes.activeLinkScroll : classes.activeLink} to="/favorites">Favorites</NavLink></div>}
+          {loggedUser && loggedUser.isSeller && <div><NavLink exact activeClassName={navbarBackground || history.location.pathname !== '/' ? classes.activeLinkScroll : classes.activeLink} to="/services/new">Add Service</NavLink></div>}
+          {loggedUser && !loggedUser.isSeller && <div><NavLink exact activeClassName={navbarBackground || history.location.pathname !== '/' ? classes.activeLinkScroll : classes.activeLink} to="/signup/new-seller">Become a Seller</NavLink></div>}
         </div>
         <div className={classes.authLinks}>
           <div className={classes.searchBar}>
             {navbarSearch && <SearchBar navbar={true} />}
           </div>
-          {!loggedUser && <NavLink exact activeClassName={navbarBackground || history.location.pathname !== '/' ? classes.activeLinkScroll : classes.activeLink} to="/login">Log In</NavLink>}
-          {!loggedUser && <NavLink exact activeClassName={navbarBackground || history.location.pathname !== '/' ? classes.activeLinkScroll : classes.activeLink} to="/signup">Sign Up</NavLink>}
+          {!loggedUser && <div><NavLink exact activeClassName={navbarBackground || history.location.pathname !== '/' ? classes.activeLinkScroll : classes.activeLink} to="/login">Log In</NavLink></div>}
+          {!loggedUser && <div><NavLink exact activeClassName={navbarBackground || history.location.pathname !== '/' ? classes.activeLinkScroll : classes.activeLink} to="/signup">Sign Up</NavLink></div>}
           {loggedUser &&
             <div className={classes.navbarUserDetails}>
 
