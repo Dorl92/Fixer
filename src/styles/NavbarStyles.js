@@ -34,7 +34,7 @@ export default {
         top: "0",
         width: "100%",
         backgroundColor: "#F1F1F1",
-        borderBottom: "3px solid #c9c9c9",
+        borderBottom: "3px solid #e4e4e4",
         display: "flex",
         alignItems: "center",
         height: "80px",
@@ -48,7 +48,6 @@ export default {
             fontWeight: "400",
             textDecoration: "none",
             "&:hover": {
-                // color: "#5A5959"
                 borderBottom: "3px solid #bbbbbb"
 
             },
@@ -79,15 +78,15 @@ export default {
         "& a": {
             fontSize: "28px",
             fontWeight: "800",
-            color: "#23775a !important"
+            color: "#23775a !important",
+            "&:hover": {
+                border: "none !important"
+            }
         },
         "& span": {
             fontFamily: 'Oleo Script',
             fontSize: "30px",
             color: "#2f9974"
-        },
-        "&:hover": {
-            color: "#23775a !important"
         }
     },
     menuIcon: {

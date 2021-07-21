@@ -41,7 +41,7 @@ function Login(props) {
             <section className={classes.root}>
                 <div className={classes.header}>
                     <h2>Log In</h2>
-                    <p>Please log in yo your account to start explore our services</p>
+                    <p>Please log in to your account and start explore our services</p>
                     <Divider />
                 </div>
                 {error && <Alert severity="error">{error}</Alert>}
