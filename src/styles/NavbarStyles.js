@@ -42,14 +42,12 @@ export default {
         "& a": {
             color: "black",
             paddingBottom: "26px",
-            padding: "0 0.5rem",
-            transition: "all 0.1s ease-in-out",
+            padding: "0 0.6rem",
             fontSize: "20px",
             fontWeight: "400",
             textDecoration: "none",
             "&:hover": {
                 borderBottom: "3px solid #bbbbbb"
-
             },
         }
     },

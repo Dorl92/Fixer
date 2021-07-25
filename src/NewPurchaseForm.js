@@ -47,7 +47,7 @@ function NewPurchaseForm(props) {
         evt.preventDefault();
         let plan = null;
         switch (pricePlan) {
-            case 'basic':
+            case 'basic': 
                 plan = {
                     planType: 'Basic',
                     price: (serviceData.price * 1).toFixed(1),
