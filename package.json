@@ -29,6 +29,9 @@
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.2"
   },
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "start": "react-scripts --max_old_space_size=460 start",
     "build": "react-scripts --max_old_space_size=460 build",
