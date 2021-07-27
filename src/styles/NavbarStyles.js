@@ -42,7 +42,7 @@ export default {
         "& a": {
             color: "black",
             paddingBottom: "26px",
-            margin: "0 0.5rem",
+            padding: "0 0.5rem",
             fontSize: "20px",
             fontWeight: "400",
             textDecoration: "none",

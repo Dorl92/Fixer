@@ -51,9 +51,10 @@ function EditServiceForm(props) {
     }, [price]);
 
     const handleUploadImages = async (evt) => {
-        const uploadImages = [...images]
-        for (let i = 0; i < evt.target.files.length; i++) {
-            const imageFile = evt.target.files[i];
+        const uploadImages = [...images];
+        let files = evt.target.files;
+        for (let i = 0; i < files.length; i++) {
+            const imageFile = files[i];
             const formData = new FormData();
             formData.append("upload_preset", "fixer_app");
             formData.append("file", imageFile);
