@@ -32,9 +32,9 @@ export default {
             fontFamily: "Nunito"
         },
         [sizes.down("sm")]: {
-            "& input":{
+            "& input": {
                 height: props => (props.navbar ? "30px" : "36px"),
-                width: props => (props.navbar ? "220px" : "240px"),
+                width: props => (props.navbar ? "160px" : "160px"),
             }
         },
     },
@@ -52,6 +52,9 @@ export default {
         "&:hover": {
             backgroundColor: "#164736",
         },
+        [sizes.down("sm")]: {
+            padding: props => (props.navbar ? "5px 15px" : "5px 15px"),
+        }
     },
     noSuggestions: {
         border: "1px solid rgb(240, 240, 240)",

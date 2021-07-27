@@ -10,10 +10,7 @@ export default {
             width: "70%",
         },
         [sizes.down("lg")]: {
-            width: "80%",
-        },
-        [sizes.down("md")]: {
-            width: "100%",
-        },
+            width: "90%",
+        }
     }
 }

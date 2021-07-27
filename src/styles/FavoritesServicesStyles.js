@@ -16,9 +16,6 @@ export default {
         [sizes.down("md")]: {
             width: "80%",
         },
-        [sizes.down("sm")]: {
-            width: "60%",
-        },
     },
     services: {
         boxSizing: "border-box",

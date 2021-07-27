@@ -1,3 +1,5 @@
+import sizes from './sizes';
+
 export default {
     container: {
         display: "flex",
@@ -17,6 +19,10 @@ export default {
         width: "0.6%",
         height: "100%",
         borderRadius: "4px 0 0 4px",
+        [sizes.down("sm")]: {
+            width: "1%",
+        },
+
     },
     title: {
         width: "35%",
@@ -32,7 +38,10 @@ export default {
         fontSize: "14px",
         fontWeight: "300",
         padding: "1px 12px",
-        margin: "3px 0px"
+        margin: "3px 0px",
+        [sizes.down("sm")]: {
+            display: "none",
+        },
     },
     sellerImage: {
         margin: "0 0.5rem",
@@ -53,7 +62,10 @@ export default {
         height: "100%",
         width: "10%",
         marginLeft: "auto",
-        display: "flex"
+        display: "flex",
+        [sizes.down("sm")]: {
+            width: "20%",
+        },
     },
     circle: {
         height: "70%",

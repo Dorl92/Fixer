@@ -25,7 +25,7 @@ export default {
             width: "55%",
         },
         [sizes.down("sm")]: {
-            width: "65%",
+            width: "90%",
         },
     },
     header: {

@@ -6,7 +6,7 @@ export default {
         color: "white",
         fontSize: "20px",
         top: "0",
-        width: "100%",
+        width: "100vw",
         background: "transparent",
         display: "flex",
         alignItems: "center",
@@ -32,7 +32,7 @@ export default {
         color: "black",
         fontSize: "20px",
         top: "0",
-        width: "100%",
+        width: "100vw",
         backgroundColor: "#F1F1F1",
         borderBottom: "3px solid #e4e4e4",
         display: "flex",
@@ -42,13 +42,13 @@ export default {
         "& a": {
             color: "black",
             paddingBottom: "26px",
-            padding: "0 0.6rem",
+            margin: "0 0.5rem",
             fontSize: "20px",
             fontWeight: "400",
             textDecoration: "none",
             "&:hover": {
                 borderBottom: "3px solid #bbbbbb"
-            },
+            }
         }
     },
     logo: {
@@ -65,6 +65,11 @@ export default {
         "& span": {
             fontFamily: 'Oleo Script',
             fontSize: "30px",
+        },
+        [sizes.down("sm")]: {
+            "& a":{
+                display: "none"
+            }
         }
     },
     logoScroll: {
@@ -85,6 +90,11 @@ export default {
             fontFamily: 'Oleo Script',
             fontSize: "30px",
             color: "#2f9974"
+        },
+        [sizes.down("sm")]: {
+            "& a":{
+                display: "none"
+            }
         }
     },
     menuIcon: {
@@ -101,6 +111,11 @@ export default {
     navbarUserDetails: {
         display: "flex",
         alignItems: "center",
+        [sizes.down("sm")]: {
+            "& span": {
+                display: "none"
+            }
+        }
     },
     searchBar: {
         paddingRight: "2rem",
@@ -136,6 +151,13 @@ export default {
         alignItems: "center",
         marginRight: "1rem",
         marginLeft: "auto",
+        // [sizes.down("sm")]: {
+        //     paddingRight: "0.5rem",
+        //     marginRight: "0.3rem",
+        //     "& a": {
+        //         fontSize: "16px"
+        //     }
+        // }
     },
     signout: {
         transform: "scale(1.3)",

@@ -22,14 +22,14 @@ export default {
         display: "flex",
         justifyContent: "space-between",
         [sizes.down("md")]: {
-            display: "block",
+            flexDirection: "column",
         },
     },
     legend: {
         width: "20%",
         padding: "1rem",
         [sizes.down("md")]: {
-            width: "100%",
+            width: "70%",
         },
     },
     category: {

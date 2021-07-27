@@ -25,6 +25,7 @@ function Home(props) {
     const settings = {
         className: "center",
         pauseOnHover: true,
+        arrows: false,
         autoplay: true,
         centerMode: true,
         infinite: true,

@@ -32,7 +32,7 @@ export default {
             width: "50%",
         },
         [sizes.down("sm")]: {
-            width: "65%",
+            width: "75%",
         }
     },
     dashboard: {

@@ -90,7 +90,8 @@ export default {
         [sizes.down("md")]: {
             display: "flex",
             width: "100%",
-            flexDirection: "column-reverse"
+            flexDirection: "column-reverse",
+            paddingTop: "3rem"
         },
     },
     secondContainer: {
@@ -109,7 +110,7 @@ export default {
         [sizes.down("md")]: {
             display: "flex",
             width: "100%",
-            flexDirection: "column"
+            flexDirection: "column",
         },
     },
     text: {

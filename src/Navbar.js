@@ -79,7 +79,6 @@ function Navbar(props) {
           {!loggedUser && <div><NavLink exact={true} activeClassName={navbarBackground || history.location.pathname !== '/' ? classes.activeLinkScroll : classes.activeLink} to="/signup">Sign Up</NavLink></div>}
           {loggedUser &&
             <div className={classes.navbarUserDetails}>
-
               <span>Welcome, <strong>{loggedUser.username || 'Friend'}</strong></span>
               <Avatar src={loggedUser.photoUrl} onClick={moveToUserProfile} className={classes.avatar} />
               <ExitToAppIcon className={classes.signout} onClick={handleLogout} />

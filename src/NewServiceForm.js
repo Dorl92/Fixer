@@ -112,7 +112,7 @@ function NewServiceForm(props) {
                         onChange={changeTitle}
                         type="text"
                         margin="normal"
-                        label="Enter title for your service"
+                        label="Enter title"
                         validators={['required']}
                         errorMessages={['Title is required']} />
                     <FormControl style={{ width: "100%" }}>
