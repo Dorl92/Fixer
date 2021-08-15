@@ -77,30 +77,30 @@ function ServiceimApp() {
                     <TransitionGroup>
                         <CSSTransition key={location.key} timeout={500} classNames="Page">
                             <Switch location={location}>
-                                <Route exact path="/" render={(routePros) =>
+                                <Route exact={true} path="/" render={(routePros) =>
                                     <Page><Home {...routePros} /></Page>}
                                 />
                                 {loggedUser && loggedUser.isSeller &&
-                                    <Route exact path="/services/new" render={(routePros) =>
+                                    <Route exact={true} path="/services/new" render={(routePros) =>
                                         <Page><NewServiceForm {...routePros} /></Page>} />
                                 }
                                 {!loggedUser &&
-                                    <Route exact path="/signup" render={(routePros) =>
+                                    <Route exact={true} path="/signup" render={(routePros) =>
                                         <Page><Signup {...routePros} /></Page>} />
                                 }
-                                <Route exact path="/signup/new-seller" render={(routePros) =>
+                                <Route exact={true} path="/signup/new-seller" render={(routePros) =>
                                     <Page><NewSellerForm {...routePros} /></Page>
                                 }
                                 />
                                 {!loggedUser &&
-                                    <Route exact path="/login" render={(routePros) =>
+                                    <Route exact={true} path="/login" render={(routePros) =>
                                         <Page><Login {...routePros} /></Page>} />
                                 }
-                                <Route exact path="/services" render={(routePros) =>
+                                <Route exact={true} path="/services" render={(routePros) =>
                                     <Page><ServicesList {...routePros} /></Page>
                                 }
                                 />
-                                <Route exact path="/services/:serviceId/info" render={(routePros) =>
+                                <Route exact={true} path="/services/:serviceId/info" render={(routePros) =>
                                     <Page>
                                         <ServiceInfo
                                             {...routePros}
@@ -110,11 +110,11 @@ function ServiceimApp() {
                                 }
                                 />
                                 {loggedUser &&
-                                    <Route exact path="/favorites" render={(routePros) =>
+                                    <Route exact={true} path="/favorites" render={(routePros) =>
                                         <Page><FavoritesServices {...routePros} /></Page>}
                                     />
                                 }
-                                <Route exact path="/services/:id/edit" render={(routePros) =>
+                                <Route exact={true} path="/services/:id/edit" render={(routePros) =>
                                     <Page>
                                         <EditServiceForm
                                             {...routePros}
@@ -123,7 +123,7 @@ function ServiceimApp() {
                                     </Page>
                                 }
                                 />
-                                <Route exact path="/services/:category" render={(routePros) =>
+                                <Route exact={true} path="/services/:category" render={(routePros) =>
                                     <Page>
                                         <ServicesList
                                             {...routePros}
@@ -131,7 +131,7 @@ function ServiceimApp() {
                                         />
                                     </Page>}
                                 />
-                                <Route exact path="/user-info/:userId" render={(routePros) =>
+                                <Route exact={true} path="/user-info/:userId" render={(routePros) =>
                                     <Page><UserInfo {...routePros} /> </Page>
                                 }
                                 />

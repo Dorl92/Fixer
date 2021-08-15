@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './styles/LayoutStyles';
 import { withStyles } from '@material-ui/styles';
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 function Layout(props) {
     const { classes } = props;
@@ -11,6 +12,7 @@ function Layout(props) {
         <div>
             <Navbar serviceCategories={serviceCategories} />
             <main className={classes.root}>{props.children}</main>
+            <Footer />
         </div>
     );
 }

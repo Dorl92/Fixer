@@ -38,6 +38,9 @@ function SoldService(props) {
             barColor = "#59990A";
             progress = 100;
             break;
+        default:
+            barColor = "#7AD30D";
+            break;
     }
 
     let categoryColor = null;
@@ -60,6 +63,9 @@ function SoldService(props) {
         case 'Programming & Tech':
             categoryColor = "#BD7A23";
             break;
+        default:
+            categoryColor = "black";
+
     }
 
     const daysLeft = (end) => {
@@ -73,7 +79,6 @@ function SoldService(props) {
 
     let numDaysColor = null;
     const numDays = daysLeft(sale.deliveryDate)
-    console.log(numDays)
     switch (true) {
         case (numDays >= 0 && numDays < 3):
             numDaysColor = "#C42513";
@@ -99,6 +104,8 @@ function SoldService(props) {
         case (numDays >= 26 && numDays < 31):
             numDaysColor = "#339312";
             break;
+        default:
+            numDaysColor = "#339312";
     }
 
     let serviceData = null;
@@ -116,7 +123,6 @@ function SoldService(props) {
 
     }
     const nextProgressStage = () => {
-        console.log(sale)
         editPurchase({ ...sale, progressStage: sale.progressStage + 1 }, sale.purchaseId)
     }
 

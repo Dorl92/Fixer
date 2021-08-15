@@ -126,7 +126,7 @@ function NewServiceForm(props) {
                             onChange={changeCategory}
                             validators={['required']}
                             errorMessages={['Select service type']} >
-                            {SERVICE_CATEGORIS_LIST.map(typeItem => <MenuItem value={typeItem}>{typeItem}</MenuItem>)}
+                            {SERVICE_CATEGORIS_LIST.map(typeItem => <MenuItem key={typeItem} value={typeItem}>{typeItem}</MenuItem>)}
                         </TextValidator>
                     </FormControl>
                     {category &&
@@ -155,7 +155,7 @@ function NewServiceForm(props) {
                         validators={['required', 'isPricePositive']}
                         errorMessages={['Starting price is required', 'Price must be bigger then 0']} />
                     <div className={classes.description}>
-                        <label for="text">Add a Short Description</label>
+                        <label htmlFor="text">Add a Short Description</label>
                         <textarea
                             id="text"
                             cols="20"
@@ -189,8 +189,8 @@ function NewServiceForm(props) {
                                 {images &&
                                     <div className={classes.imagesContainer}>
                                         {images.map(image => (
-                                            <div className={classes.image}>
-                                                <img src={image} />
+                                            <div className={classes.image} key={image}>
+                                                <img src={image} alt="service-img" />
                                                 <section className={classes.deleteImageIcon} onClick={() => handleDeleteImage(image)} >
                                                     <DeleteIcon />
                                                 </section>

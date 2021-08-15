@@ -200,8 +200,8 @@ function EditServiceForm(props) {
                                     {images &&
                                         <div className={classes.imagesContainer}>
                                             {images.map(image => (
-                                                <div className={classes.image}>
-                                                    <img src={image} />
+                                                <div className={classes.image} key={image}>
+                                                    <img src={image} alt="service-img" />
                                                     <section className={classes.deleteImageIcon} onClick={() => handleDeleteImage(image)} >
                                                         <Delete />
                                                     </section>

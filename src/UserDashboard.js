@@ -11,7 +11,7 @@ function UserDashboard(props) {
     const { classes, userPurchases, onSortEnd } = props;
     let legned = new Map();
     if (userPurchases) {
-        userPurchases.map(purchase => {
+        userPurchases.forEach(purchase => {
             let count = legned.get(purchase.serviceCategory)
             if (count === undefined) {
                 legned.set(purchase.serviceCategory, 1)
@@ -42,6 +42,8 @@ function UserDashboard(props) {
             case 'Programming & Tech':
                 categoryColor = "#BD7A23";
                 break;
+            default:
+                categoryColor = "black";
         }
         return (
             <div className={classes.category}>

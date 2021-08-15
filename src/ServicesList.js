@@ -8,7 +8,7 @@ import styles from './styles/ServicesListStyles';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 //material-ui
-import {Snackbar, IconButton,Divider} from '@material-ui/core';
+import { Snackbar, IconButton, Divider } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { withStyles } from '@material-ui/styles';
 //contexts
@@ -34,6 +34,14 @@ function ServicesList(props) {
     const fullServiceInfo = serviceId => {
         history.push(`/services/${serviceId}/info`);
     }
+    const availableServicesCount = () => {
+        if (!category) return services.length;
+        let count = 0;
+        services.forEach(service => {
+            if ((service.category.toLowerCase() === category) || (service.subcategory.toLowerCase() === category)) count++;
+        })
+        return count;
+    }
 
     return (
         <Layout>
@@ -41,7 +49,7 @@ function ServicesList(props) {
                 <h2 className={classes.title}>{category ? `Search results for: ${category.charAt(0).toUpperCase() + category.slice(1).replace('-', ' ')}` : 'All Our Services'}</h2>
                 <p className={classes.subtitle}>Take a time to look after all our services. Choose one that fit you the best.</p>
                 <Divider />
-                <h4>{category ? null : services.length} services available</h4>
+                <h4>{availableServicesCount()} services available</h4>
                 {services ?
                     <TransitionGroup className={classes.services}>
                         {category ? services.map(service => {
@@ -54,6 +62,8 @@ function ServicesList(props) {
                                             fullServiceInfo={fullServiceInfo} />
                                     </CSSTransition>
                                 )
+                            } else {
+                                return null;
                             }
                         }) :
                             services.map(service => (

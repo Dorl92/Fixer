@@ -12,9 +12,9 @@ import { Fragment } from 'react';
  
 function Navbar(props) {
   const { history, classes } = props;
-  const [error, setError] = useState("")
   const [navbarBackground, setNavbarBackground] = useState(false)
   const [navbarSearch, setNavbarSearch] = useState(false)
+  const [error, setError] = useState();
   const [openDrawer, setOpenDrawer] = useState(false)
 
   const { logout, loggedUser } = useAuth();

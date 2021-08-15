@@ -11,7 +11,6 @@ import SellerDashboard from './SellerDashboard';
 import UserDashboard from './UserDashboard';
 //context
 import { useAuth } from './contexts/authContext';
-import { useServicesContext } from './contexts/servicesContext';
 import { useUsersContext } from './contexts/usersContext';
 import { usePurchasesContext } from './contexts/purchasesContext';
 //hooks
@@ -66,7 +65,7 @@ function UserInfo(props) {
                     setUserPurchases(userPurchases)
                 }
             })
-    }, [])
+    }, [userId])
 
     useEffect(() => {
         if (userData) {

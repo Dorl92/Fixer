@@ -5,7 +5,7 @@ export default {
         display: "flex",
         alignItems: "center",
         width: "100%",
-        fontSize: "16px",
+        fontSize: "14px",
         height: "60px",
         borderRadius: "4px",
         backgroundColor: "rgb(240, 240, 240)",
@@ -13,6 +13,9 @@ export default {
         "&:hover": {
             cursor: "pointer",
             backgroundColor: "rgb(226, 226, 226)",
+        },
+        [sizes.down("sm")]: {
+            fontSize: "12px",
         },
     },
     categoryColor: {
@@ -22,11 +25,13 @@ export default {
         [sizes.down("sm")]: {
             width: "1%",
         },
-
     },
     title: {
         width: "35%",
         margin: "0 0.5rem",
+        [sizes.down("sm")]: {
+            width: "50%",
+        },
     },
     subcategory: {
         width: "25%"
@@ -35,7 +40,6 @@ export default {
         borderRadius: "15px",
         color: "white",
         width: "fit-content",
-        fontSize: "14px",
         fontWeight: "300",
         padding: "1px 12px",
         margin: "3px 0px",
@@ -53,9 +57,8 @@ export default {
     },
     deliveryDate: {
         width: "15%",
-        marginLeft: "1rem",
+        marginLeft: "2rem",
         marginRight: "1rem",
-        fontSize: "14px",
         color: "#727474"
     },
     progress: {

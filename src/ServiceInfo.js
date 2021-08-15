@@ -123,7 +123,7 @@ function ServiceInfo(props) {
                                 <Slider {...settings} >
                                     {serviceData && serviceData.images.map(image =>
                                         <div key={image}>
-                                            <img src={image} style={{ width: "100%", height: "100%" }} />
+                                            <img src={image} style={{ width: "100%", height: "100%" }} alt="service-img" />
                                         </div>
                                     )}
                                 </Slider>

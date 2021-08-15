@@ -33,6 +33,8 @@ function PurchaseService(props) {
         case 3:
             progress = 100;
             break;
+        default:
+            progress = 10;
     }
 
     let categoryColor;
@@ -53,8 +55,10 @@ function PurchaseService(props) {
             categoryColor = "#13A429";
             break;
         case 'Programming & Tech':
-            categoryColor = "#BD7A23"; 
+            categoryColor = "#BD7A23";
             break;
+        default:
+            categoryColor = "black"
     }
 
     let serviceData = null;
@@ -67,6 +71,8 @@ function PurchaseService(props) {
         sellerData = users.find(user => user.userId === purchase.sellerId)
     }
 
+    const delivery = new Date(purchase.deliveryDate);
+
     return (
         <Fragment>
             {serviceData && sellerData &&
@@ -77,7 +83,7 @@ function PurchaseService(props) {
                         <div style={{ backgroundColor: categoryColor }} className={classes.tab}>{serviceData.subcategory}</div>
                     </div>
                     <Avatar src={sellerData.photoUrl} className={classes.sellerImage} onClick={() => history.push(`/user-info/${serviceData.sellerId}`)} />
-                    <div className={classes.deliveryDate}>{purchase.deliveryDate}</div>
+                    <div className={classes.deliveryDate}>{delivery.toUTCString().slice(0, 16)}</div>
                     <div className={classes.progress}>
                         <CircularProgressbar
                             className={classes.circle}

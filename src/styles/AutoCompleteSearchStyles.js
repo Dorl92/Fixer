@@ -12,7 +12,7 @@ export default {
     },
     carousel: {
         position: "absolute",
-        width: "100%",
+        width: "100vw",
         height: "700px",
         top: "0",
         left: "0",

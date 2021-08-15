@@ -12,6 +12,7 @@ export default {
         alignItems: "center",
         height: "80px",
         zIndex: "25",
+        transition: "all 0.2s ease-in-out",
         "& a": {
             color: "white",
             margin: "0 0.5rem",
@@ -39,6 +40,7 @@ export default {
         alignItems: "center",
         height: "80px",
         zIndex: "25",
+        transition: "all 0.2s ease-in-out",
         "& a": {
             color: "black",
             paddingBottom: "26px",
@@ -57,19 +59,15 @@ export default {
         height: "100%",
         display: "flex",
         alignItems: "center",
+        transition: "all 0.2s ease-in-out",
         "& a": {
             fontSize: "28px",
-            fontWeight: "800",
+            fontWeight: "300",
             color: "white !important"
         },
         "& span": {
             fontFamily: 'Oleo Script',
             fontSize: "30px",
-        },
-        [sizes.down("sm")]: {
-            "& a":{
-                display: "none"
-            }
         }
     },
     logoScroll: {
@@ -78,10 +76,11 @@ export default {
         height: "100%",
         display: "flex",
         alignItems: "center",
+        transition: "all 0.2s ease-in-out",
         "& a": {
             fontSize: "28px",
-            fontWeight: "800",
-            color: "#23775a !important",
+            fontWeight: "300",
+            color: "#2f9974 !important",
             "&:hover": {
                 border: "none !important"
             }
@@ -89,18 +88,14 @@ export default {
         "& span": {
             fontFamily: 'Oleo Script',
             fontSize: "30px",
-            color: "#2f9974"
-        },
-        [sizes.down("sm")]: {
-            "& a":{
-                display: "none"
-            }
+            color: "#23775a"
         }
     },
     menuIcon: {
         transform: "scale(1.5)",
         padding: "0 0.5rem",
         display: "none",
+        color: "#535353",
         "&:hover": {
             cursor: "pointer"
         },
@@ -151,13 +146,11 @@ export default {
         alignItems: "center",
         marginRight: "1rem",
         marginLeft: "auto",
-        // [sizes.down("sm")]: {
-        //     paddingRight: "0.5rem",
-        //     marginRight: "0.3rem",
-        //     "& a": {
-        //         fontSize: "16px"
-        //     }
-        // }
+        [sizes.down("sm")]: {
+            "& a":{
+                display: "none"
+            }
+        }
     },
     signout: {
         transform: "scale(1.3)",
@@ -195,13 +188,13 @@ export default {
         marginTop: "1rem",
         "& a": {
             fontSize: "28px",
-            fontWeight: "900",
-            color: "#23775a"
+            fontWeight: "400",
+            color: "#2f9974"
         },
         "& span": {
             fontFamily: 'Oleo Script',
             fontSize: "30px",
-            color: "#2f9974"
+            color: "#23775a"
         }
     },
     drawerAuthLinks: {

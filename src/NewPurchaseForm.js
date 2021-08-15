@@ -9,7 +9,7 @@ import useInputState from './hooks/useInputState';
 import styles from './styles/NewPurchaseFormStyles';
 //material-ui
 import { withStyles } from '@material-ui/styles';
-import { Divider,Button,Dialog,Radio,RadioGroup,FormControlLabel,FormLabel } from '@material-ui/core';
+import { Divider, Button, Dialog, Radio, RadioGroup, FormControlLabel, FormLabel } from '@material-ui/core';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 
 function NewPurchaseForm(props) {
@@ -47,7 +47,7 @@ function NewPurchaseForm(props) {
         evt.preventDefault();
         let plan = null;
         switch (pricePlan) {
-            case 'basic': 
+            case 'basic':
                 plan = {
                     planType: 'Basic',
                     price: (serviceData.price * 1).toFixed(1),
@@ -66,6 +66,13 @@ function NewPurchaseForm(props) {
                     planType: 'Premium',
                     price: (serviceData.price * 1.4).toFixed(1),
                     daysToDelivery: 14
+                }
+                break;
+            default:
+                plan = {
+                    planType: 'Basic',
+                    price: (serviceData.price * 1).toFixed(1),
+                    daysToDelivery: 30
                 }
                 break;
         }
@@ -97,7 +104,7 @@ function NewPurchaseForm(props) {
                     <div className={classes.sellerName}>By <strong>{sellerData.username}</strong></div>
                     <ValidatorForm className={classes.form} onSubmit={handleSubmit}>
                         <Divider />
-                        <FormLabel style={{ fontFamily: "Nunito", marginTop: "1.5rem"}} component="legend">Select Price Plan</FormLabel>
+                        <FormLabel style={{ fontFamily: "Nunito", marginTop: "1.5rem" }} component="legend">Select Price Plan</FormLabel>
                         <RadioGroup aria-label="pricePlan" name="pricePlan" value={pricePlan} onChange={handlePricePlanChange}>
                             <FormControlLabel value="basic" control={<Radio color="primary" />} label={basic} />
                             <FormControlLabel value="standard" control={<Radio color="primary" />} label={standard} />

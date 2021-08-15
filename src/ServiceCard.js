@@ -128,8 +128,8 @@ function Card(props) {
                     <div className={classes.image} onClick={() => fullServiceInfo(serviceData.serviceId)}>
                         {loggedUser && loggedUser.userId === serviceData.sellerId &&
                             <div className={classes.options}>
-                                <IconButton>
-                                    <MoreVert onClick={handleClick} />
+                                <IconButton onClick={handleClick}>
+                                    <MoreVert />
                                 </IconButton>
                                 <Menu
                                     id="simple-menu"
@@ -155,7 +155,7 @@ function Card(props) {
                         {serviceData.images && serviceData.images.map((image, index) => {
                             return (
                                 <div className={index === currentImage ? classes.slideActive : classes.slide} key={index}>
-                                    {index === currentImage && (<img src={image} />)}
+                                    {index === currentImage && (<img src={image} alt="service-img" />)}
                                 </div>
                             )
                         })}
@@ -223,7 +223,7 @@ function Card(props) {
                 open={openSnackbar}
                 autoHideDuration={6000}
                 onClose={handleSnackbarClose}
-                anchorOrigin={{ vertical: "center", horizontal: "center" }}>
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}>
                 <Alert onClose={handleSnackbarClose} severity="error">
                     Can't delete this service. please complete all previous purchases before!
                 </Alert>

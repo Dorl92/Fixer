@@ -5,16 +5,16 @@ import { withRouter } from 'react-router-dom';
 //contexts
 import { useServicesContext } from './contexts/servicesContext';
 //style
+
 import styles from './styles/SearchBarStyles';
 //material-ui
 import SearchIcon from '@material-ui/icons/Search';
 import { withStyles } from '@material-ui/styles';
 
 function AutocompleteSearch(props) {
-    const { classes, history } = props;
     
+    const { classes, history } = props;
     const { services } = useServicesContext();
-
     const [state, setState] = useState({
         activeSuggestion: 0,
         filteredSuggestions: [],
@@ -27,8 +27,9 @@ function AutocompleteSearch(props) {
     const onSearchChange = evt => {
         const userInput = evt.currentTarget.value;
         const filteredSuggestions = searchData(services).filter(
-            category => category.toLowerCase().indexOf(userInput.toLowerCase()) > -1
+            searchField => searchField.toLowerCase().indexOf(userInput.toLowerCase()) > -1
         );
+        console.log(filteredSuggestions)
         setState({
             activeSuggestion: 0,
             filteredSuggestions,
@@ -54,23 +55,24 @@ function AutocompleteSearch(props) {
                 showSuggestions: false,
                 userInput: filteredSuggestions[activeSuggestion]
             });
-        } else if (evt.keyCode === 38) {
-            if (activeSuggestion === 0) {
-                return;
-            }
-            setState({
-                activeSuggestion: activeSuggestion - 1
-            });
+            // } else if (evt.keyCode === 38) {
+            //     if (activeSuggestion === 0) {
+            //         return;
+            //     }
+            //     setState({
+            //         activeSuggestion: activeSuggestion - 1
+            //     });
+            // }
+            // else if (evt.keyCode === 40) {
+            //     if (activeSuggestion - 1 === filteredSuggestions.length) {
+            //         return;
+            //     }
+            //     setState({
+            //         activeSuggestion: activeSuggestion + 1
+            //     });
+            // }
         }
-        else if (evt.keyCode === 40) {
-            if (activeSuggestion - 1 === filteredSuggestions.length) {
-                return;
-            }
-            setState({
-                activeSuggestion: activeSuggestion + 1
-            });
-        }
-    };
+    }
 
     const handleSearch = () => {
         history.push(`/services/${userInput.toLowerCase()}`)
@@ -103,7 +105,6 @@ function AutocompleteSearch(props) {
     }
 
     return (
-
         <div className={classes.searchBar}>
             <span className={classes.searchIcon}>
                 <SearchIcon />

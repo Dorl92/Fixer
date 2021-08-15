@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 //style
 import styles from './styles/ServicesListStyles';
 //components
 import Layout from './Layout';
-import Loader from 'react-loader-spinner';
 import ServiceCard from './ServiceCard';
 //contexts
 import { useAuth } from './contexts/authContext';

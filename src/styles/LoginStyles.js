@@ -38,7 +38,6 @@ export default {
         alignItems: "center",
         width: "50%",
         flexDirection: "column",
-        alignItems: "center",
         margin: "1rem auto 2rem auto",
         "& div":{
             width: "100%"
