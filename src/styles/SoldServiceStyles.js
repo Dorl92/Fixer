@@ -8,7 +8,7 @@ export default {
         [sizes.down("xxl")]: {
             width: "238px",
         },
-        height: "120px",
+        height: "130px",
         borderRadius: "4px",
         backgroundColor: "rgb(240, 240, 240)",
         marginBottom: "0.5rem",
@@ -38,10 +38,13 @@ export default {
         height: "100%",
         borderRadius: "4px 0 0 4px",
     },
-    sale:{
+    sale: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
         width: "100%"
     },
-    subcategory:{
+    subcategory: {
         margin: "0.5rem"
     },
     tab: {
@@ -57,11 +60,21 @@ export default {
         width: "80%",
         margin: "0 0.5rem",
     },
+    userDetails: {
+        display: "flex",
+        alignItems: "center",
+        color: "#525252"
+    },
     username: {
         margin: "0.5rem",
-        color: "#525252",
         fontSize: "14px",
         fontWeight: "300"
+    },
+    note: {
+        zIndex: "10",
+        "&:hover": {
+            cursor: "pointer"
+        }
     },
     header: {
         display: "flex",
@@ -97,7 +110,7 @@ export default {
         borderRadius: "50%",
         backgroundColor: "white",
     },
-    completionBar:{
+    completionBar: {
         margin: "0.5rem"
     }
 }

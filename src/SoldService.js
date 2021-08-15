@@ -10,8 +10,8 @@ import styles from './styles/SoldServiceStyles';
 //material-ui
 import { withStyles } from '@material-ui/styles';
 import Avatar from '@material-ui/core/Avatar';
-import { NavigateBefore, NavigateNext, Done } from '@material-ui/icons';
-
+import { NavigateBefore, NavigateNext, Done, Info } from '@material-ui/icons';
+import Tooltip from '@material-ui/core/Tooltip';
 
 function SoldService(props) {
     const { classes, sale } = props;
@@ -166,8 +166,15 @@ function SoldService(props) {
                                 </div>
                             </div>
                         </div>
-                        <div className={classes.username}>
-                            Purchased by <strong>{userData.username}</strong>
+                        <div className={classes.userDetails}>
+                            <div className={classes.username}>
+                                Purchased by <strong>{userData.username}</strong>
+                            </div>
+                            <Tooltip
+                                className={classes.note}
+                                title={sale.note ? sale.note : `${userData.username} has not added any notes to this service`} arrow>
+                                <Info />
+                            </Tooltip>
                         </div>
                         <div className={classes.completionBar}>
                             <ProgressBar
